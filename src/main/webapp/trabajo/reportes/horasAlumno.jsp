@@ -45,6 +45,8 @@
     HashMap<String,String> mapaPlanes                   = (HashMap<String,String>)request.getAttribute("mapaPlanes");    
     HashMap<String,ResComentario> mapaMaxiComentario    = (HashMap<String,ResComentario>)request.getAttribute("mapaMaxiComentario");
 
+    // SVN commit test.
+
 %>
 <link rel="stylesheet" href="../../js/chosen/chosen.css" />
 <div class="container-fluid">
