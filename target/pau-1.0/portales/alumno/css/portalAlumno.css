@@ -1,0 +1,85 @@
+body {
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	font-size: 10pt;
+}
+TABLE  {
+	font-size: 9pt;
+	border-width: 0px;
+	border-color: black;
+	
+}
+TABLE.tabla  {
+	font-size: 9pt;
+	border-width: 2px;
+	border-style: ridge;
+	border-color: black;
+	background:#FFFFFF;
+	-moz-border-radius: 7px;
+	-webkit-border-radius: 7px;
+}
+.encabezado{
+	font-size:10px;
+	color:#336699;
+}
+.encabezado2{
+	font-size:12px;
+	color:#FFFFFF;
+}
+td {
+	font-size: 8pt;
+	font-size:11px;
+}
+.encabezadoV {
+	font-size: 8pt;
+	font-size:11px;
+	font-weight:bold;
+	color:white;
+	background-color:#3899C3;
+	border:solid;
+	border-top-width:0px;
+	border-left-width:0px;
+	border-right-width:0px;
+	border-bottom-width:1px;
+	border-color:#d5d9e2;
+}
+th2 {
+	font-size: 9pt;
+	font-size:11px;
+	background-color:#94C8DE;
+	border:solid;
+	border-top-width:0px;
+	border-left-width:0px;
+	border-right-width:0px;
+	border-bottom-width:1px;
+	border-color:#d5d9e2;
+}
+TH{
+	/*background : url(../../../imagenes/lineaPrin.png);*/
+	text-align : center;
+	font-size: 9pt;
+	padding : 1px;	
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px; 
+}
+.TablaMarco{
+	border:solid;
+	border-width:1px;
+	border-color:#d5d9e2;
+	background-color:#ffffff;
+}
+.TablaTabs{
+	border:solid; 
+	border-bottom-width:1px;
+	border-left-width:0px;
+	border-right-width:0px;
+	border-top-width:0px; 
+	border-color:#d5d9e2;
+}
+.textoTabs{
+	font-size:12px;
+	font-weight:bold;
+	color:white;
+}

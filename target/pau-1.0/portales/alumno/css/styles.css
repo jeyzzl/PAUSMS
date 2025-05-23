@@ -1,0 +1,57 @@
+#content{width:80%;margin:0 auto;max-width:900px;font-family:"Lucida Grande", sans-serif;}
+.evento{background-color:#D3C4A3;font-size:12px;padding:15px;margin:10px;
+     -moz-box-shadow: 1px 1px 4px #888; /* FF3.5+ */
+  -webkit-box-shadow: 1px 1px 4px #888; /* Saf3.0+, Chrome */
+          box-shadow: 1px 1px 4px #888; /* Opera 10.5, IE 9 */
+	 -moz-border-radius: 12px; /* FF1+ */
+  -webkit-border-radius: 12px; /* Saf3-4 */
+          border-radius: 12px;
+}
+.evento h1{padding:0px;margin:0px;font-size:18px;font-weight:bold;color:#FFFCFA;
+text-shadow: 1px 1px 3px #222;
+}
+
+.evento h1 img{padding-right:10px;}
+
+.desc{color:#1D1912;padding:10px 10px 10px 0px;margin-bottom:5px;border-bottom:1px solid #C9BB9B}
+.fecha{padding-left:20px;background:url(../img/fecha.png) no-repeat;padding-right:30px;}
+.fecha b{color:#4D4942}
+.lugar{padding-left:20px;background:url(../img/lugar.png) no-repeat;padding-right:10px;}
+.capacidad{padding-left:20px;background:url(../img/capacidad.png) no-repeat;padding-right:0px;}
+
+.errorSummary{background-color: #ffebe8;border: 1px solid #dd3c10;color: #333333;padding: 10px;font-size: 13px;font-weight: bold; width:550px;margin:0 auto;text-align:center;}
+
+.asistir{float:right;height:53px;width:130px;background:url(../img/asistir.png) no-repeat;cursor:pointer;}
+.asistir input{display:inline}
+.asistir:hover, .asistir.checked{background-position:0px -47px;}
+
+.desreservar{float:right;width:150px;padding-top:40px;color:gray}
+
+.boton{display:block;margin:40px auto;width:100px;height:33px;font-size:14px;}
+
+.form{clear:both;margin-top:10px;}
+
+.actions li{float:left;list-style:none;}
+
+.actions li a{text-decoration:none;color:white;display:block;padding:5px 8px;margin:3px;background-color:#8E9792;
+     -moz-box-shadow: 1px 1px 2px #444; /* FF3.5+ */
+  -webkit-box-shadow: 1px 1px 2px #444; /* Saf3.0+, Chrome */
+          box-shadow: 1px 1px 2px #444; /* Opera 10.5, IE 9 */
+	 -moz-border-radius: 4px; /* FF1+ */
+  -webkit-border-radius: 4px; /* Saf3-4 */
+          border-radius: 4px;
+}
+
+.actions li a:hover{background-color:#6E7772;
+     -moz-box-shadow: 1px 1px 6px #111; /* FF3.5+ */
+  -webkit-box-shadow: 1px 1px 6px #111; /* Saf3.0+, Chrome */
+          box-shadow: 1px 1px 6px #111; /* Opera 10.5, IE 9 */
+}
+
+.actions li a.activo{background-color:#BBF69D;color:#333;}
+
+.actions{clear:both;}
+
+h2{letter-spacing:-1px;font-style:italics}
+
+.help{background-color: #eceff6;border: 1px solid #d4dae8;color: #333333;padding: 10px;margin-bottom:20px;}

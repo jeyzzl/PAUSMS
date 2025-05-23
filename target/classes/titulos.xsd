@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="https://www.siged.sep.gob.mx/titulos/"
+targetNamespace="https://www.siged.sep.gob.mx/titulos/" elementFormDefault="qualified">
+<xs:element name="TituloElectronico">
+<xs:annotation>
+<xs:documentation>Estándar para la generación de títulos profesionales, diplomas o grados académicos electrónicos.
+</xs:documentation>
+</xs:annotation>
+<xs:complexType>
+<xs:sequence>
+<xs:element name="FirmaResponsables">
+<xs:annotation>
+<xs:documentation>Nodo que contiene las firmas electrónicas aplicadas por los responsables de las instituciones educativas.</xs:documentation>
+</xs:annotation>
+<xs:complexType>
+<xs:sequence>
+<xs:element name="FirmaResponsable" maxOccurs="unbounded" minOccurs="1">
+<xs:annotation>
+<xs:documentation>Nodo que contiene el detalle de la firma electrónica aplicada al documento electrónico, por los responsables de la institución educativa.</xs:documentation>
+</xs:annotation>
+<xs:complexType>
+<xs:attribute name="nombre" type="xs:string" use="required">
+<xs:annotation>
+<xs:documentation>Atributo requerido que contiene el nombre del firmante responsable.</xs:documentation>
+</xs:annotation>
+</xs:attribute>
+<xs:attribute name="primerApellido" type="xs:string"
+use="required">
+<xs:annotation>
+<xs:documentation>Atributo requerido que contiene el primer apellido del firmante responsable.</xs:documentation>
+</xs:annotation>
+</xs:attribute>
+<xs:attribute name="segundoApellido" type="xs:string"
+use="optional">
+<xs:annotation>
+<xs:documentation>Atributo opcional que contiene el segundo apellido del firmante responsable.</xs:documentation>
+</xs:annotation>
+</xs:attribute>
+<xs:attribute name="curp" type="xs:string" use="required">
+<xs:annotation>
+<xs:documentation>Atributo requerido que contiene CURP del firmante responsable.</xs:documentation>
+</xs:annotation>
+</xs:attribute>
+<xs:attribute name="idCargo" type="xs:integer" use="required">
+<xs:annotation>
+<xs:documentation>Atributo requerido que contiene el identificador del cargo que desempeña el responsable de la institución.</xs:documentation>
+</xs:annotation>
+</xs:attribute>
+<xs:attribute name="cargo" type="xs:string" use="required">
+<xs:annotation>
+<xs:documentation>Atributo requerido que contiene el valor del cargo que desempeña el responsable de la institución.</xs:documentation>
+</xs:annotation>
+</xs:attribute>
+<xs:attribute name="abrTitulo" type="xs:string"
+form="unqualified" use="optional">
+<xs:annotation>
+<xs:documentation>Atributo opcional que contiene abreviatura del título o grado académico del firmante.</xs:documentation>
+</xs:annotation>
+</xs:attribute>
+<xs:attribute name="sello" type="xs:string" use="required">
+<xs:annotation>
+<xs:documentation>Atributo requerido con valor del sello digital del título electrónico, expresado en una cadena de texto en formato Base64.</xs:documentation>
+</xs:annotation>
+</xs:attribute>
+<xs:attribute name="certificadoResponsable" type="xs:string"
+use="required">
+<xs:annotation>
+<xs:documentation>Atributo requerido para expresar el certificado de sello (archivo .cer) que ampara al título electrónico como texto, en formato Base64.</xs:documentation>
+</xs:annotation>
+</xs:attribute>
+<xs:attribute name="noCertificadoResponsable" type="xs:string"
+use="required">
+<xs:annotation>
+<xs:documentation>Atributo requerido para expresar el número de serie del certificado de sello (archivo .cer) del responsable que ampara al título electrónico.</xs:documentation>
+</xs:annotation>
+</xs:attribute>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="Institucion">
+<xs:annotation>
+<xs:documentation>Nodo que contiene la información que identifica a la institución educativa.</xs:documentation>
+</xs:annotation>
+<xs:complexType>
+<xs:attribute name="cveInstitucion" type="xs:string" use="required">
+<xs:annotation>
+<xs:documentation>Atributo requerido que contiene el identificador de la institución educativa que emitió el documento.</xs:documentation>
+</xs:annotation>
+</xs:attribute>
+<xs:attribute name="nombreInstitucion" type="xs:string" use="required">
+<xs:annotation>
+<xs:documentation>Atributo requerido que contiene el nombre de la institución educativa que emitió el documento.</xs:documentation>
+</xs:annotation>
+</xs:attribute>
+</xs:complexType>
+</xs:element>
+<xs:element name="Carrera">
+<xs:annotation>
+<xs:documentation>Nodo que contiene la información de la carrera cursada por el profesionista.</xs:documentation>
+</xs:annotation>
+<xs:complexType>
+<xs:attribute name="cveCarrera" type="xs:string" use="required">
+<xs:annotation>
+<xs:documentation>Atributo requerido que contiene el identificador de la carrera.</xs:documentation>
+</xs:annotation>
+</xs:attribute>
+<xs:attribute name="nombreCarrera" type="xs:string" use="required">
+<xs:annotation>
+<xs:documentation>Atributo requerido que contiene el nombre de la carrera.</xs:documentation>
+</xs:annotation>
+</xs:attribute>
+<xs:attribute name="fechaInicio" type="xs:date" use="optional">
+<xs:annotation>
+<xs:documentation>Atributo opcional que contiene la fecha de inicio de la carrera cursada.</xs:documentation>
+</xs:annotation>
+</xs:attribute>
+<xs:attribute name="fechaTerminacion" type="xs:date" use="required">
+<xs:annotation>
+<xs:documentation>Atributo requerido que contiene la fecha de terminación de la carrera cursada.</xs:documentation>
+</xs:annotation>
+</xs:attribute>
+<xs:attribute name="idAutorizacionReconocimiento" type="xs:integer"
+use="required">
+<xs:annotation>
+<xs:documentation>Atributo requerido que contiene el identificador correspondiente al tipo de autorización o reconocimiento de estudios otorgado por autoridad competente.</xs:documentation>
+</xs:annotation>
+</xs:attribute>
+<xs:attribute name="autorizacionReconocimiento" type="xs:string"
+use="required">
+<xs:annotation>
+<xs:documentation>Atributo requerido que contiene la descripción del tipo de autorización o reconocimiento de estudios otorgado por autoridad competente.</xs:documentation>
+</xs:annotation>
+</xs:attribute>
+<xs:attribute name="numeroRvoe" type="xs:string" form="unqualified"
+use="optional">
+<xs:annotation>
+<xs:documentation>Atributo condicional que indica el número de Reconocimiento de Validez Oficial de Estudios otorgado por la autoridad competente. </xs:documentation>
+</xs:annotation>
+</xs:attribute>
+</xs:complexType>
+</xs:element>
+<xs:element name="Profesionista">
+<xs:annotation>
+<xs:documentation>Nodo que contiene los datos del profesionista.
+</xs:documentation>
+</xs:annotation>
+<xs:complexType>
+<xs:attribute name="curp" type="xs:string" use="required">
+<xs:annotation>
+<xs:documentation>Atributo requerido que contiene el valor del CURP del profesionista.</xs:documentation>
+</xs:annotation>
+</xs:attribute>
+<xs:attribute name="nombre" type="xs:string" use="required">
+<xs:annotation>
+<xs:documentation>Atributo requerido que contiene el nombre del profesionista.
+</xs:documentation>
+</xs:annotation>
+</xs:attribute>
+<xs:attribute name="primerApellido" type="xs:string" use="required">
+<xs:annotation>
+<xs:documentation>Atributo requerido que contiene el primer apellido del profesionista.</xs:documentation>
+</xs:annotation>
+</xs:attribute>
+<xs:attribute name="segundoApellido" type="xs:string" use="optional">
+<xs:annotation>
+<xs:documentation>Atributo opcional que contiene el segundo apellido del profesionista.</xs:documentation>
+</xs:annotation>
+</xs:attribute>
+<xs:attribute name="correoElectronico" type="xs:string" use="required">
+<xs:annotation>
+<xs:documentation>Atributo requerido que contiene el correo electrónico del profesionista.</xs:documentation>
+</xs:annotation>
+</xs:attribute>
+</xs:complexType>
+</xs:element>
+<xs:element name="Expedicion">
+<xs:annotation>
+<xs:documentation>Nodo que contiene los datos de la expedición del título profesional, diploma o grado académico electrónico.</xs:documentation>
+</xs:annotation>
+<xs:complexType>
+<xs:attribute name="fechaExpedicion" type="xs:date" use="required">
+<xs:annotation>
+<xs:documentation>Atributo requerido que contiene la fecha de expedición del documento.</xs:documentation>
+</xs:annotation>
+</xs:attribute>
+<xs:attribute name="idModalidadTitulacion" type="xs:integer" use="required">
+<xs:annotation>
+<xs:documentation>Atributo requerido que contiene el identificador correspondiente a la modalidad de titulación.</xs:documentation>
+</xs:annotation>
+</xs:attribute>
+<xs:attribute name="modalidadTitulacion" type="xs:string" use="required">
+<xs:annotation>
+<xs:documentation>Atributo requerido que contiene la descripción de la modalidad de titulación.</xs:documentation>
+</xs:annotation>
+</xs:attribute>
+<xs:attribute name="fechaExamenProfesional" type="xs:date" use="optional">
+<xs:annotation>
+<xs:documentation>Atributo condicional que contiene la fecha del examen profesional. Se debe informar dependiendo de la modalidad de titulación.</xs:documentation>
+</xs:annotation>
+</xs:attribute>
+<xs:attribute name="fechaExencionExamenProfesional" type="xs:date"
+use="optional">
+<xs:annotation>
+<xs:documentation>Atributo condicional que contiene la fecha de exención del examen profesional. Se debe informar dependiendo de la modalidad de titulación.</xs:documentation>
+</xs:annotation>
+</xs:attribute>
+<xs:attribute name="cumplioServicioSocial" type="xs:integer" use="required">
+<xs:annotation>
+<xs:documentation>Atributo requerido que contiene si el profesionista cumplió con el servicio social.</xs:documentation>
+</xs:annotation>
+</xs:attribute>
+<xs:attribute name="idFundamentoLegalServicioSocial" type="xs:integer"
+use="required">
+<xs:annotation>
+<xs:documentation>Atributo requerido que contiene el identificador correspondiente al fundamento legal relativo a la realización del servicio social.</xs:documentation>
+</xs:annotation>
+</xs:attribute>
+<xs:attribute name="fundamentoLegalServicioSocial" type="xs:string"
+use="required">
+<xs:annotation>
+<xs:documentation>Atributo requerido que contiene el fundamento legal relativo a la realización del servicio social.</xs:documentation>
+</xs:annotation>
+</xs:attribute>
+<xs:attribute name="idEntidadFederativa" type="xs:string" use="required">
+<xs:annotation>
+<xs:documentation>Atributo requerido que contiene el identificador de la entidad federativa, donde se expidió el documento electrónico.</xs:documentation>
+</xs:annotation>
+</xs:attribute>
+<xs:attribute name="entidadFederativa" type="xs:string" use="required">
+<xs:annotation>
+<xs:documentation>Atributo requerido que contiene la descripción de la entidad federativa, donde se expidió el documento electrónico.</xs:documentation>
+</xs:annotation>
+</xs:attribute>
+</xs:complexType>
+</xs:element>
+<xs:element name="Antecedente">
+<xs:annotation>
+<xs:documentation>Nodo que contiene los datos de estudios antecedentes del profesionista.</xs:documentation>
+</xs:annotation>
+<xs:complexType>
+<xs:attribute name="institucionProcedencia" type="xs:string" use="required">
+<xs:annotation>
+<xs:documentation>Atributo requerido que contiene el nombre de la institución de procedencia de los estudios de antecedente.</xs:documentation>
+</xs:annotation>
+</xs:attribute>
+<xs:attribute name="idTipoEstudioAntecedente" type="xs:integer"
+use="required">
+<xs:annotation>
+<xs:documentation>Atributo requerido que contiene el identificador correspondiente al tipo de estudio de antecedente.</xs:documentation>
+</xs:annotation>
+</xs:attribute>
+<xs:attribute name="tipoEstudioAntecedente" type="xs:string" use="required">
+<xs:annotation>
+<xs:documentation>Atributo requerido que contiene la descripción del tipo de estudio de antecedente.</xs:documentation>
+</xs:annotation>
+</xs:attribute>
+<xs:attribute name="idEntidadFederativa" type="xs:string" use="required">
+<xs:annotation>
+<xs:documentation>Atributo requerido que contiene el identificador de la entidad federativa de los estudios de antecedente.</xs:documentation>
+</xs:annotation>
+</xs:attribute>
+<xs:attribute name="entidadFederativa" type="xs:string" use="optional">
+<xs:annotation>
+<xs:documentation>Atributo requerido que contiene la descripción de la entidad federativa de los estudios de antecedente.</xs:documentation>
+</xs:annotation>
+</xs:attribute>
+<xs:attribute name="fechaInicio" type="xs:date" use="optional">
+<xs:annotation>
+<xs:documentation>Atributo opcional que contiene la fecha de inicio de los estudios de antecedente.</xs:documentation>
+</xs:annotation>
+</xs:attribute>
+<xs:attribute name="fechaTerminacion" type="xs:date" use="required">
+<xs:annotation>
+<xs:documentation>Atributo requerido que contiene la fecha de terminación de los estudios de antecedente.</xs:documentation>
+</xs:annotation>
+</xs:attribute>
+<xs:attribute name="noCedula" type="xs:string" form="unqualified"
+use="optional">
+<xs:annotation>
+<xs:documentation>Atributo opcional que contiene el número de cédula correspondiente a los estudios de antecedente.</xs:documentation>
+</xs:annotation>
+</xs:attribute>
+</xs:complexType>
+</xs:element>
+<xs:element minOccurs="0" name="Autenticacion">
+<xs:annotation>
+<xs:documentation>Nodo exclusivo de la autoridad competente que otorgó la Autorización o Reconocimiento de Validez Oficial de Estudios (RVOE), donde se incluirá el sello de la autenticación del documento electrónico.
+</xs:documentation>
+</xs:annotation>
+<xs:complexType>
+<xs:sequence>
+<xs:any maxOccurs="1" minOccurs="0" namespace="any"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+<xs:attribute name="version" use="required" fixed="1.0">
+<xs:annotation>
+<xs:documentation>Atributo requerido con valor prefijado a 1.0 que indica la versión del estándar bajo el que se encuentra expresado el Título Electrónico.</xs:documentation>
+</xs:annotation>
+<xs:simpleType>
+<xs:restriction base="xs:string">
+<xs:whiteSpace value="collapse"/>
+</xs:restriction>
+</xs:simpleType>
+</xs:attribute>
+<xs:attribute name="folioControl" type="xs:string" use="required">
+<xs:annotation>
+<xs:documentation>Atributo requerido que indica el folio de control interno asignado al título electrónico.</xs:documentation>
+</xs:annotation>
+</xs:attribute>
+</xs:complexType>
+</xs:element>
+</xs:schema>

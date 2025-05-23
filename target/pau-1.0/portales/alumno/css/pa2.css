@@ -1,0 +1,70 @@
+body {
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	font-family: Verdana,Arial, Helvetica, sans-serif;
+	background-color:#D6DEEC;
+}
+.encabezado{
+	font-size:10px;
+	color:#336699;
+}
+.encabezado2{
+	font-size:12px;
+	color:#FFFFFF;
+}
+td {
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:11px;
+}
+.encabezadoV {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size:11px;
+	font-weight:bold;
+	color:white;
+	background-color:#3162A6;
+	border:solid;
+	border-top-width:0px;
+	border-left-width:0px;
+	border-right-width:0px;
+	border-bottom-width:1px;
+	border-color:#d5d9e2;
+}
+th {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size:11px;
+	background-color:#95B3DE;
+	border:solid;
+	border-top-width:0px;
+	border-left-width:0px;
+	border-right-width:0px;
+	border-bottom-width:1px;
+	border-color:#d5d9e2;
+}
+a{
+	text-decoration:none;
+	color:#355381;
+}
+a:hover{
+	text-decoration:underline;
+}
+.TablaMarco{
+	border:solid;
+	border-width:1px;
+	border-color:#d5d9e2;
+	background-color:#ffffff;
+}
+.TablaTabs{
+	border:solid; 
+	border-bottom-width:1px;
+	border-left-width:0px;
+	border-right-width:0px;
+	border-top-width:0px; 
+	border-color:#d5d9e2;
+}
+.textoTabs{
+	font-size:12px;
+	font-weight:bold;
+	color:white;
+}

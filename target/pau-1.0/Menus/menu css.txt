@@ -1,0 +1,39 @@
+<style type="text/css">
+#menu div.barraMenu,
+#menu div.barraMenu a.botonMenu {
+font-family: sans-serif, Verdana, Arial;
+font-size: 8pt;
+color: white;
+}
+
+#menu div.barraMenu {
+text-align: left;
+}
+
+#menu div.barraMenu a.botonMenu {
+background-color: #556975;
+color: white;
+cursor: pointer;
+padding: 4px 6px 2px 5px;
+text-decoration: none;
+}
+
+#menu div.barraMenu a.botonMenu:hover {
+background-color: #637D4D;
+}
+
+#menu div.barraMenu a.botonMenu:active {
+background-color: #637D4D;
+color: black;
+}
+</style>
+
+<div id="menu"><div class="barraMenu">
+<a class="botonMenu" href="">Opcixn 1</a>
+<a class="botonMenu" href="">Opcixn 2</a>
+<a class="botonMenu" href="">Opcixn 3</a>
+<a class="botonMenu" href="">Opcixn 4</a>
+</div></div>
+background-color de a.botonMenu : color de estado reposo (out).
+background-color de a.botonMenu:hover : color de estado sobre (over).
+background-color de a.botonMenu:active : color de estado seleccionado.

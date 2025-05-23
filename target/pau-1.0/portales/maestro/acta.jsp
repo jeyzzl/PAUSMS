@@ -1,0 +1,354 @@
+<%@page import="java.util.List"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="aca.carga.spring.CargaGrupo"%>
+<%@page import="aca.catalogo.spring.CatEstrategia"%>
+<%@page import="aca.catalogo.spring.CatTipoCal"%>
+<%@page import="aca.plan.spring.MapaCurso"%>
+<%@page import="aca.carga.spring.CargaGrupoEvaluacion"%>
+<%@page import="aca.vista.spring.AlumnoCurso"%>
+<%@page import="aca.kardex.spring.KrdxAlumnoEval"%>
+<%@page import="aca.kardex.spring.KrdxCursoAct"%>
+<%@page import="aca.parametros.spring.Parametros"%>
+
+<%@ include file= "id.jsp" %>
+<%@ include file= "../../seguro.jsp" %>
+<%@ include file="../../idioma.jsp"%>
+
+<html>
+<head>
+	<link href="../../print.css" rel="stylesheet" type="text/css" media="print">
+</head>
+<style type="text/css">
+
+	.style2 {
+		font-size: 11px;
+		font-family: Arial, Helvetica, sans-serif;
+	}
+	.style3 {
+		font-family: Arial, Helvetica, sans-serif;
+		font-weight: bold;
+		font-size: 12px;
+	}
+	.style4 {
+		font-family: Arial, Helvetica, sans-serif;
+		font-weight: bold;
+		font-size: 20px;
+	}
+	TH  {
+		border-width : 1px;
+		border-color : #000000;
+		border-style : solid;
+		padding : 1px;
+		font-family: Arial, Helvetica, sans-serif;
+		font-weight: bold;
+		font-size: 12px;
+		color: black;
+	}
+	TD  {
+		border-color : #000000;
+		font-family: Arial, Helvetica, sans-serif;
+		font-size: 12px;
+	}
+</style>
+
+<body bgcolor="#FFFFFF">
+<%
+	java.text.DecimalFormat getFormato = new java.text.DecimalFormat("##0.0;-##0.0");
+
+ 	String cursoCargaId		= request.getParameter("cursoCargaId")==null?"0":request.getParameter("cursoCargaId");
+	String imp				= request.getParameter("imp");
+	String institucion 		= (String)session.getAttribute("institucion");
+	
+	CargaGrupo cargaGrupo 	= (CargaGrupo) request.getAttribute("cargaGrupo");
+	MapaCurso mapaCurso 	= (MapaCurso) request.getAttribute("mapaCurso");
+	String estadoMateria	= (String) request.getAttribute("estado");
+	String maestroNombre	= (String) request.getAttribute("maestroNombre");
+	String facultadNombre	= (String) request.getAttribute("facultadNombre");
+	String carreraNombre	= (String) request.getAttribute("carreraNombre");
+	String coordinador 		= (String) request.getAttribute("coordinador");
+
+	Parametros parametros = (Parametros)request.getAttribute("parametros");
+	
+	float notaAprobatoria 	= 0;		
+	String notaEvaluacion	= "";
+	String promedio		= "";
+	int i=0,j=0;
+	
+	List<CargaGrupoEvaluacion> lisEvaluaciones 			= (List<CargaGrupoEvaluacion>) request.getAttribute("lisEvaluaciones");
+	List<AlumnoCurso> lisAlumnos			 			= (List<AlumnoCurso>) request.getAttribute("lisAlumnos");
+	HashMap<String,CatEstrategia> mapaEstrategias 		= (HashMap<String,CatEstrategia>) request.getAttribute("mapaEstrategias");
+	HashMap<String,CatTipoCal> mapaTipos		 		= (HashMap<String,CatTipoCal>) request.getAttribute("mapaTipoCal");
+	HashMap<String,KrdxAlumnoEval> mapaEvaluaciones 	= (HashMap<String,KrdxAlumnoEval>) request.getAttribute("mapaEvaluaciones");
+	HashMap<String,KrdxCursoAct> mapaNotas				= (HashMap<String,KrdxCursoAct>) request.getAttribute("mapaNotas");
+	HashMap<String,String> mapaEvaluadas				= (HashMap<String,String>) request.getAttribute("mapaEvaluadas");
+	HashMap<String,String> mapaExtras					= (HashMap<String,String>) request.getAttribute("mapaExtras");
+	HashMap<String,String> mapaAlumnoPuntos				= (HashMap<String,String>) request.getAttribute("mapaAlumnoPuntos");
+	HashMap<String,String> mapaAlumnoExtras				= (HashMap<String,String>) request.getAttribute("mapaAlumnoExtras");
+	HashMap<String,String> mapaAlumnos					= (HashMap<String,String>) request.getAttribute("mapaAlumnos");
+
+	String codigoPostal = "";
+	String ubicacion = "";
+	String pais = "";
+	String telefono = "";
+	if(parametros.getInstitucion().equals("Pacific Adventist University")){	
+		codigoPostal = "Private Mail Bag, Boroko 111,";
+		ubicacion = "National Capital District,";
+		pais = "Papua New Guinea";
+		telefono = "+675 7411 1300";
+	}
+	if(parametros.getInstitucion().equals("Sonoma")){
+		codigoPostal = "P. O. BOX 360,";
+		ubicacion = "Kokopo 613, East New Britain";
+		pais = "Papue New Guinea";
+		telefono = "+675 982 1782";
+	}
+	if(parametros.getInstitucion().equals("Fulton")){
+		codigoPostal = "Sabeto Rd,";
+		ubicacion = "Nadi,";
+		pais = "Fiji";
+		telefono = "+679 999 3118";
+	}
+%>
+<table cellspacing="2" style="float:left">
+	<tr>
+	 	<td width="120" align="left" valign="top">
+			<a href="javascript:window.print()"><img src="../../imagenes/logo.jpg"  width="98" alt="Imprimir"></a><br><br>
+			<span class="style2"><br>
+				<b><%=institucion%></b><br>
+				<br>
+				<%=codigoPostal%><br> <!-- Postal Code -->
+				<%=ubicacion%><br> <!-- Location -->
+				<%=pais%><br> <!-- Country -->
+				<br>
+				<strong>Phone:</strong><br>
+				<%=telefono%><br> <!-- Phone -->
+				<%-- Commutator 263-0900<br>
+				Ext. 119,120,121 <br>
+				Fax (826) 263-0979<br> --%>
+				<br>
+				<b>Generated by</b> <br>
+				<%=institucion%><br>
+				<br>
+				<%-- <b>Institution Code</b><br>
+				before the SEP and the<br>
+				General Directorate of Statistics<br>
+				19MSU1017U --%>
+			</span>		
+		</td>
+		<td width="100%" valign="top" bordercolor="0" >	  
+			<table style="width:100%" cellpadding="2"  border="2" bordercolor="#777777">
+			  <tr>
+				<td width="50%" align="center">
+					<span class="style3">
+<%						if (estadoMateria.equals("2")){
+%>							" This is NOT an official document. "
+<%						}else if (estadoMateria.equals("3")){
+%>							" Official Document (Ordinary) " 
+<%						}else if (estadoMateria.equals("4") || estadoMateria.equals("5")){
+%>							" Official Document ( Ordinary - Extraordinary ) " 
+<%						}
+%>					</span></td>
+				<td width="50%" align="right"><span class="style4">#<%=cursoCargaId%></span></td>
+			  </tr>
+			</table>
+			<table style="width:100%" cellpadding="2" >
+			  <tr>
+				<td width="50%" align="center" >
+				<table style="width:100%" cellpadding="2" cellspacing="2">
+                  <tr>
+                    <th colspan="2" align="left"><%=facultadNombre%></th>
+                  </tr>
+                  <tr>
+                    <th colspan="2" align="left"><%=carreraNombre%></th>
+                  </tr>
+                  <tr>
+                    <th width="22%" align="left">Course:</th>
+                    <td width="78%"><%=mapaCurso.getNombreCurso()%></td>
+                  </tr>
+                  <tr>
+                    <th align="left">Semester:</th>
+                    <td><%=mapaCurso.getCiclo()%></td>
+                  </tr>
+                  <tr>
+                    <th align="left">Credits:</th>
+                    <td><%=mapaCurso.getCreditos()%></td>
+                  </tr>
+                  <tr>
+<%	
+	String sHp = mapaCurso.getHp();
+	String sHt = mapaCurso.getHt();
+	if (sHp.equals("")) sHp ="0";
+	int hp = Integer.parseInt(sHp);
+	if (sHt.equals("")) sHt ="0";
+	int ht = Integer.parseInt(sHt);
+%>
+                    <th align="left">Hours:</th>
+                    <td><%=ht+hp%></td>
+                  </tr>
+			  
+                  <tr>
+                    <th align="left">Lecturer:</th>
+                    <td><%=maestroNombre%></td>
+                  </tr>
+                  <tr>
+                    <td colspan="2">
+						<table style="width:100%"  cellspacing="2" >
+							<tr>
+								<th width="7%"><font size="1">No.</font></th>
+								<th width="16%"><font size="1">Date</font></th>
+								<th width="63%"><font size="1">Evaluation</font></th>
+								<th width="14%"><font size="1">Weight</font></th>
+							</tr>
+<%
+	double suma=0;
+	int row = 0;
+	for (CargaGrupoEvaluacion cargaGrupoEvaluacion : lisEvaluaciones){
+		row++;
+		suma+= Double.valueOf(cargaGrupoEvaluacion.getValor()).doubleValue();
+		
+		String estrategiaNombre = "-";
+		if (mapaEstrategias.containsKey(cargaGrupoEvaluacion.getEstrategiaId())){
+			estrategiaNombre = mapaEstrategias.get(cargaGrupoEvaluacion.getEstrategiaId()).getNombreEstrategia();
+		}
+%>							<tr>
+							  <td align="center"><font size="1"><%=row%>.-</font></td>
+							  <td align="center"><font size="1"><%=cargaGrupoEvaluacion.getFecha()%></font></td>
+							  <td><font size="1"><%=estrategiaNombre%> <%=cargaGrupoEvaluacion.getNombreEvaluacion()%></font></td>
+							  <td align="right"><font size="1"><%=cargaGrupoEvaluacion.getValor()%> <%=cargaGrupoEvaluacion.getTipo()%></font></td>
+							</tr>
+<%	}	%>					
+							<tr>
+							  <th colspan="4" align="right"><font size="1">Total <%=suma%></font></th>
+						    </tr>
+						</table>
+					</td>
+                  </tr>
+                </table>
+				</td>
+				<td width="50%" align="left" valign="top">
+					<table style="width:100%; height:100%" cellpadding="2"  border="2" bordercolor="#777777">
+						<tr><td width="100%" align="center">
+							<b>Observations:</b> The minimum passing grade is <%=Float.parseFloat(mapaCurso.getNotaAprobatoria())/10%>.<br>  
+							<%=institucion%><br>
+							<%=(cargaGrupo.getEstado().equals("4") || cargaGrupo.getEstado().equals("5"))?cargaGrupo.getfEvaluacion():aca.util.Fecha.getHoy() %><%/*java.text.DateFormat.getDateInstance(1).format(new java.util.Date())*/%><br><br>
+							_______________________________________<br>
+							Dean: <b><%=coordinador%></b><br><br>
+							_______________________________________<br>
+							Lecturer: <b><%=maestroNombre%></b><br>
+
+						</td></tr>
+					</table>
+				</td>
+			  </tr>
+			  <tr>
+			  	<td colspan="2">
+					<table style="width:100%"  cellspacing="2">
+					  <tr>
+						<th><font size="1"><spring:message code="aca.Numero"/></font></th>
+						<th><font size="1"><spring:message code="aca.Plan"/></font></th>
+						<th><font size="1">Student ID</font></th>
+						<th><font size="1">Name</font></th>
+<%		for (i=0;i<lisEvaluaciones.size();i++){ %>
+						<th width="25"><font size="1"><%=i+1%></font></th>
+<%		}%>
+						<th title="Graded Points"><font size="1">Points</font></th>
+						<th title="Total Points"><font size="1">Total</font></th>
+						<th title="Extra Points"><font size="1">Ex.P.</font></th>
+						<th title="Average"><font size="1">Avg.</font></th>
+						<th title="Extra Grade"><font size="1">Ex.G.</font></th>
+						<th><font size="1">Status</font></th>
+					  </tr>
+<%	
+	row = 0;
+	for (AlumnoCurso ac : lisAlumnos){
+		if (!ac.getTipoCalId().equals("M")){
+			row++;
+			
+			String alumnoNombre = "-";
+			if (mapaAlumnos.containsKey(ac.getCodigoPersonal())){
+				alumnoNombre = mapaAlumnos.get(ac.getCodigoPersonal());
+			}
+%>
+					  <tr>
+						<td align="center" height="15"><font size="1"><%=row%></font></td>
+						<td align="center"><font size="1"><%=ac.getCursoId().substring(0,8)%></font></td>
+						<td align="center"><font size="1"><%=ac.getCodigoPersonal()%></font></td>	
+						<td align="left"><font size="1"><%=alumnoNombre%></font></td>
+<%
+			for (CargaGrupoEvaluacion cargaGrupoEvaluacion : lisEvaluaciones){
+				notaEvaluacion = "-";
+				if (mapaEvaluaciones.containsKey( ac.getCodigoPersonal()+ac.getCursoCargaId()+cargaGrupoEvaluacion.getEvaluacionId() )){
+					notaEvaluacion = mapaEvaluaciones.get( ac.getCodigoPersonal()+ac.getCursoCargaId()+cargaGrupoEvaluacion.getEvaluacionId()).getNota();
+				}				
+				if(notaEvaluacion.equals("-")){
+%>
+						<td width="25" align="right"><font size="1"><%=notaEvaluacion%></font></td>
+<%				}else{
+%>						<td width="25" align="right"><font size="1"><% out.print(getFormato.format(Double.valueOf(notaEvaluacion)/10));%></font></td>
+			<%	}
+			}
+
+			KrdxCursoAct kardex = new KrdxCursoAct();
+			if (mapaNotas.containsKey(ac.getCodigoPersonal())){
+				kardex 		= mapaNotas.get(ac.getCodigoPersonal());				
+			}
+			
+			if(estadoMateria.equals("2")|| estadoMateria.equals("3") || estadoMateria.equals("4") || estadoMateria.equals("5")){
+				promedio = kardex.getNota();
+			}else{				
+				promedio = "0";
+			}	
+			if (promedio==null) promedio="0";
+			promedio = String.valueOf((long)Math.floor(Double.valueOf(promedio).doubleValue() + 0.5d));
+			
+			String puntosEvaluados	= "0";
+			if (mapaEvaluadas.containsKey(ac.getCodigoPersonal())){
+				puntosEvaluados = mapaEvaluadas.get(ac.getCodigoPersonal());
+			}
+			
+			String puntosAlumno	= "0";
+			if (mapaAlumnoPuntos.containsKey(ac.getCodigoPersonal())){
+				puntosAlumno 	= mapaAlumnoPuntos.get(ac.getCodigoPersonal());
+			}
+			
+			String puntosExtras 	= "0"; 
+			if (mapaAlumnoExtras.containsKey(ac.getCodigoPersonal())){
+				puntosExtras 	= mapaAlumnoExtras.get(ac.getCodigoPersonal());
+			}
+			if (puntosExtras==null || puntosExtras.equals("0")) puntosExtras = "";
+%>
+						<td align="center"><font size="1"><b><%=puntosAlumno%></b></font></td>
+						<td align="center"><font size="1"><b><%=puntosEvaluados%></b></font></td>
+						<td align="center"><font size="1"><b><%=puntosExtras%></b></font></td>
+						<td align="center"><font size="1"><b><%=Double.parseDouble(promedio)/10%></b></font></td>
+						<td align="center"><font size="1"><b>
+<%			if (kardex.getNotaExtra()==null || kardex.getNotaExtra().equals("0")){
+				out.print("&nbsp;"); 
+			}else{
+				if ( Integer.parseInt(kardex.getNotaExtra()) > 0 ){
+					out.print( getFormato.format(Double.parseDouble(kardex.getNotaExtra()) / 10));
+				}
+			}
+
+			String tipoNombre = "";
+			if (mapaTipos.containsKey(kardex.getTipoCalId())){
+				tipoNombre = mapaTipos.get(kardex.getTipoCalId()).getNombreTipoCal();
+			}
+%>						</b></font></td>
+					<td align="center"><font size="1"><%=tipoNombre%></font></td>
+				</tr>
+<%		} // termina if tipoCal != 'M'
+
+	} //fin de ciclo lisAlumnos
+%>
+					<tr>
+						<th colspan="30"><font size="2">End of Student Listing &nbsp; &nbsp; &nbsp; &nbsp;   #<%=cursoCargaId%></font></th>
+					  </tr>
+				  </table>
+				</td>
+			  </tr>
+			</table>
+			
+		</td>
+	</tr>
+</table>

@@ -1,0 +1,4 @@
+<%	
+	conAdm.close();
+	conAdm=null;
+%>

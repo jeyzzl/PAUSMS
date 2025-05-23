@@ -1,0 +1,56 @@
+@font-face {
+  font-family: "Garamond";
+  font-stretch: normal;
+   src: url("/fonts/Garamond/eb-garamond-v9-latin-regular.woff") format("woff");
+}
+BODY{background:white;
+	font-family:"Garamond,Helvetica Neue",Helvetica,Arial,sans-serif;
+	margin-left:1;margin-top:15;
+}
+BODY,.encabezado2,tr.th2 td{color:#000}
+TABLE,TABLE.tabla,TABLE.tabla1{font-size:7pt;}
+TABLE,TABLE.goback{border-width:0}
+TABLE.tabla,TABLE.tabla1,select{border-width:2px}
+TABLE.tabla{border-style:ridge;background:#fff;-moz-border-radius:3px;-webkit-border-radius:3px}
+.tabla-padding td{
+	padding: 3px 5px 3px 5px;
+}
+TABLE.tabla1{border-style:grove;-moz-border-radius:5px;-webkit-border-radius:5px}
+TABLE.goback{position:absolute;left:5px}
+tr.button,td.button,td.input,img.button{cursor:pointer;cursor:hand;}
+TD{font-size: 9pt;padding:0.5px 0.5px 0.5px 0.5px}
+TD.titulo,.head{font-style:normal}
+TD.titulo,TD.titulo3,div.letra{font-weight:bold}
+TD.titulo,div.letra{font-size:large}
+TD.titulo,TD.titulo2,TH,div.letra,.head,td.end{text-align:center}
+TD.titulo2{font-size:small}
+TD.titulo3{font-size:10pt;text-align:left}
+td.button:hover,img.button:hover{border-right:1px solid #666;border-bottom:1px solid #666;border-left:1px solid #c8d4a3;border-top:1px solid #c8d4a3}
+td.input:hover{border-right:1px solid #c8d4a3;border-bottom:1px solid #c8d4a3;border-left:1px solid #666;border-top:1px solid #666}
+TH{/*background:url(imagenes/lineaPrin.png);border:1px solid #000;padding:1px;-moz-border-radius:2px;-webkit-border-radius:2px*/}
+TH,.th2,.th3{font-size: 9pt;font-weight:200;}
+A,TH A,TH A:Hover{text-decoration:none}
+H1{font:16pt arial}
+H2{font:10pt 'trebuchet ms',helvetica,sans-serif}
+hr{border:1px solid #773a5d}
+input,select{font-size:8pt;size:11pt;letter-spacing:1px;color:#000}
+img.button{padding:1px 1px 1px 1px}
+img.button:hover{padding:0 0 0 0}
+.head{font-size:07pt;background:#822c56;color:#fbe6ca}
+.encabezado{font-size:12px;color:#369}
+.encabezado2{font-size:11px}
+.button{cursor:pointer;cursor:hand;}
+td.end{font:medium Garamond,times new roman,times,serif normal bold} 
+td.note{font:medium Garamond,times new roman,times,serif italic}
+input{margin:auto;}
+.onlyPrint{display:none;visibility:hidden;}
+
+/*class de texto*/
+.right{text-align: right !important;}
+.center{text-align: center !important;}
+.left{text-align: left !important;}
+.btn-mini {
+  padding: 2px 6px;
+  font-size: 11px;
+  line-height: 14px;
+}
