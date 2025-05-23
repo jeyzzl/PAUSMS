@@ -1,0 +1,15 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ---------------------------< aca:academico >----------------------------
+[INFO] Building academico 1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ war ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ academico ---
+[INFO] Deleting C:\Trabajo\workspace\pau\target
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  0.986 s
+[INFO] Finished at: 2023-02-22T22:10:36+01:00
+[INFO] ------------------------------------------------------------------------

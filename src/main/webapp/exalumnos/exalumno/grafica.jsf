@@ -1,0 +1,30 @@
+<script type="text/javascript" src="../../js/highcharts.js"></script>
+<script type="text/javascript" src="../../js/highChart/modules/exporting.js"></script>
+<script type="text/javascript" src="../../js/highChart/puntos.js"></script>  
+
+</div>
+
+<div class="container" style="border-top:none;">
+<table style="width:95%" style="height:300px;" class="" align="center">
+	<tr>
+		<td>
+			<%
+				String categorias = " 'Correo','Direccion','Familia','Estudio','Empleo','Iglesia','Telefono','Red Social' ";
+				
+				
+				String serie = "{name: 'Tipo de Dato', data: ["+totCorreo+","+totDireccion+","+totFamilia+","+totEstudio+","+totEmpleo+","+totIglesia+","+totTelefono+","+totRed+"]},";
+				
+			%>
+			<div style="height:300px;width:800px;margin:auto;" class="">	
+				
+				<div class="grafic">
+					<script>Puntos('Datos capturados', '', 'datos', 'Alumnos',[<%=categorias%>],  [<%=serie%>]);</script>
+				  	<div id="datos" style="width:100%; height:100%; margin: auto"></div>
+			  	</div>	 
+			  
+			</div>
+		</td>
+	</tr>
+</table>  
+
+</div>

@@ -1,0 +1,1 @@
+<script>top.location.href = "movil/portalAlumno/resumen" </script>

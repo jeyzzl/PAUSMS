@@ -1,0 +1,156 @@
+<%@page import="aca.alumno.AlumPersonal"%>
+<%@page import="aca.edo.EdoAutoPreg"%>
+<%@ include file= "../../con_enoc.jsp" %>
+<%@ include file= "id.jsp" %>
+<%@ include file= "../../seguro.jsp" %>
+<%@ include file= "../../body.jsp" %>
+<%@ include file="../../idioma.jsp"%>
+
+<jsp:useBean id="edo" scope="page" class="aca.edo.Edo"/>
+<jsp:useBean id="EdoUtil" scope="page" class="aca.edo.EdoUtil"/>
+<jsp:useBean id="edoAutoPreg" scope="page" class="aca.edo.EdoAutoPreg"/>
+<jsp:useBean id="edoAutoPregU" scope="page" class="aca.edo.EdoAutoPregUtil"/>
+<jsp:useBean id="cargaGrupo" scope="page" class="aca.carga.CargaGrupo"/>
+<jsp:useBean id="grupoUtil" scope="page" class="aca.carga.CargaGrupoUtil"/>
+<jsp:useBean id="edoAutoResp" scope="page" class="aca.edo.EdoAutoResp"/>
+<%
+	String codigoPersonal		= (String) session.getAttribute("codigoPersonal");
+	String edoId				= request.getParameter("edo");
+	String nombreMaestro		= "";
+	
+	int accion				= request.getParameter("Accion")==null?0:Integer.parseInt(request.getParameter("Accion"));
+
+	ArrayList<EdoAutoPreg> lisPreguntas = edoAutoPregU.getListEdo(conEnoc, edoId, "ORDER BY ORDEN");
+
+	edo = EdoUtil.mapeaRegId(conEnoc, edoId);
+	nombreMaestro = aca.vista.MaestrosUtil.getNombreMaestro(conEnoc, codigoPersonal, "NOMBRE");
+	
+	switch(accion){
+		case 1:{
+			boolean guardo = true;
+			for(int i = 0; i < lisPreguntas.size(); i++){
+				edoAutoPreg = (EdoAutoPreg) lisPreguntas.get(i);
+				
+				edoAutoResp.setEdoId(edoId);
+				edoAutoResp.setPreguntaId(edoAutoPreg.getPreguntaId());
+				edoAutoResp.setCodigoPersonal(codigoPersonal);
+				edoAutoResp.setRespuesta(request.getParameter("pregunta"+i));
+				if(!edoAutoResp.insertReg(conEnoc)){
+					guardo = false;
+				}
+			}
+			if(guardo){
+				out.print("<div class='alert alert-success'>Grabado...<a class='btn btn-primary' href='cursos'>Cursos</a></div>");
+				response.sendRedirect("cursos");
+			}else{
+%>
+<table style="margin: 0 auto;">
+	<tr>
+		<td><font size="3" color="red"><b>Ocurri&oacute; un error al guardar. Int&eacute;ntelo de nuevo!</b></font></td>
+	</tr>
+</table>
+<%
+			}
+		}break;
+	}
+%>
+<head>	
+	<script type="text/javascript">
+		function guardar(numPreguntas){
+			var lleno = true;
+			for(var i = 0; i < numPreguntas; i++){
+				if(eval("document.forma.pregunta"+i).tagName != "TEXTAREA"){
+					var j;
+					var filaContestada = false;
+					for(j = 0; j < eval("document.forma.pregunta"+i).length; j++){
+						if(eval("document.forma.pregunta"+i)[j].checked)
+							filaContestada = true;
+					}
+					if(!filaContestada)
+						lleno = false;
+				}
+			}
+			if(lleno){
+				if(confirm("Si guarda ya no podra modificar lo que contestó.\n¿Está seguro que desea guardar?")){
+					document.forma.action += "&Accion=1";
+					return true;
+				}
+			}else
+				alert("Llene por lo menos las preguntas de opción única para poder guardar!!!");
+			return false;
+		}
+	</script>
+</head>
+<body>
+	<form id="forma" name="forma" action="autoevaluacion?edo=<%=edoId %>" method="post">
+		<table style="margin: 0 auto;  width:80%">
+			<tr>
+				<td>&nbsp;</td>
+			</tr>
+			<tr>
+				<td align="center"><font size="3"><b>Autoevaluacion de <%=nombreMaestro %></b></font></td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+			</tr>
+			<tr>
+				<td>
+					<b>Instrucciones:</b> Lea con cuidado cada una de las declaraciones 
+					y elija la opci&oacute;n que mejor exprese su opini&oacute;n acerca 
+					de su desempeño como docente. Este instrumento debe presentarlo al 
+					Departamento acad&eacute;mico al cual pertenece	con un portafolio 
+					que inlcuya evidencias de cada aspecto autoevaluado.
+				</td>
+			</tr>
+		</table>
+		<table style="margin: 0 auto;  width:90%">
+			<tr>
+				<th width="5%"><spring:message code="aca.Numero"/></th>
+				<th width="50%">Aspecto a evaluar (docente y materia)</th>
+				<th width="9%">Deficiente</th>
+				<th width="9%">Regular</th>
+				<th width="9%">Bueno</th>
+				<th width="9%">Muy bueno</th>
+				<th width="9%">Excelente</th>
+			</tr>
+<%
+	for(int i = 0; i < lisPreguntas.size(); i++){
+		edoAutoPreg = (EdoAutoPreg) lisPreguntas.get(i);
+%>
+			<tr>
+				<td style="border-bottom: dotted 1px gray;"><%=i+1 %></td>
+				<td style="border-bottom: dotted 1px gray;"><%=edoAutoPreg.getPregunta() %></td>
+<%
+		if(edoAutoPreg.getTipo().equals("O")){
+%>
+				<td style="border-bottom: dotted 1px gray;" align="center"><input type="radio" id="pregunta<%=i %>" name="pregunta<%=i %>" value="1" /></td>
+				<td style="border-bottom: dotted 1px gray;" align="center"><input type="radio" id="pregunta<%=i %>" name="pregunta<%=i %>" value="2" /></td>
+				<td style="border-bottom: dotted 1px gray;" align="center"><input type="radio" id="pregunta<%=i %>" name="pregunta<%=i %>" value="3" /></td>
+				<td style="border-bottom: dotted 1px gray;" align="center"><input type="radio" id="pregunta<%=i %>" name="pregunta<%=i %>" value="4" /></td>
+				<td style="border-bottom: dotted 1px gray;" align="center"><input type="radio" id="pregunta<%=i %>" name="pregunta<%=i %>" value="5" /></td>
+<%
+		}else{
+%>
+				<td style="border-bottom: dotted 1px gray;" colspan="5"><textarea id="pregunta<%=i %>" name="pregunta<%=i %>" cols="50"></textarea></td>
+<%
+		}
+%>
+			</tr>
+<%
+	}
+%>
+		</table>
+		<table style="margin: 0 auto;">
+			<tr>
+				<td>&nbsp;</td>
+			</tr>
+			<tr>
+				<td>
+					<input type="submit" value="Guardar" onclick="return guardar(<%=lisPreguntas.size() %>);" />
+				</td>
+			</tr>
+		</table>
+	</form>
+</body>
+
+<%@ include file= "../../cierra_enoc.jsp" %>

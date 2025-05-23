@@ -1,0 +1,21 @@
+<jsp:useBean id="colorAlum" scope="page" class="aca.portal.Alumno"/>
+<%		
+	String sSesion			= session.getId();
+	String sUsuario			= (String) session.getAttribute("usuario");
+	String sOpciones		= (String) session.getAttribute("opciones");
+	String codPerUser		= (String) session.getAttribute("codigoPersonal");	
+	
+	String colorTablas 		= session.getAttribute("colorTablas")==null?"#683EAD":(String)session.getAttribute("colorTablas");
+	
+	if(colorTablas.equals("default") || colorTablas.equals("")){		
+		colorTablas = "#683EAD";
+	}
+	
+	String currentColor 	= session.getAttribute("colorTablas")==null?"default":(String)session.getAttribute("colorTablas");
+	if(!currentColor.equals("default")){
+		colorTablas = currentColor;
+	}
+	
+	String colorM 	= colorAlum.modificarColor(colorTablas, 25);
+	String colorM2 	= colorAlum.modificarColor(colorTablas, 105);
+%>

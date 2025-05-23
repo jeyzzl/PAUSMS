@@ -1,0 +1,30 @@
+table.lista {
+	border-top: solid 1px gray;
+}
+
+.lista th {
+	border-bottom: solid 1px gray;
+}
+
+.listado td {
+	border-top: solid 1px #cccccc;
+	border-bottom: solid 1px gray;
+}
+
+.contorno{
+	border: solic 1px gray;
+}
+
+.button {
+	cursor: pointer;
+	border: solid 1px white;
+}
+
+.button:hover {
+	border: solid 1px black;
+}
+
+p.mensaje {
+	background-color: yellow;
+	border: solid 1px blue;
+}

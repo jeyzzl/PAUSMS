@@ -1,0 +1,112 @@
+/* === CONTAINERS OF THE TIPS === */
+div.jpopup, div.jspopup{
+	font-family:sans-serif;
+	font-weight: 200;
+	z-index: 1;
+	font-size: 13px;
+	display:none;
+	position:absolute;
+	background:white;
+	border: 1px solid #E1E1E1;
+	border-radius: 3px;
+	padding: 10px;
+	vertical-align: top;
+	
+	-webkit-box-shadow: 0 1px 5px 0px #6E6E6E;
+ 	-moz-box-shadow: 0 1px 5px 0px #6E6E6E;
+	box-shadow: 0 1px 5px 0px #6E6E6E;
+	z-index:2000;
+}
+/*
+.jpopup:after {
+  position: absolute;
+  display: block;
+  content: "";
+  height:0;
+  width:0;  
+  top:auto; 
+  bottom:-19px;
+  left:50%;
+  border-color: #FBFBFB transparent transparent transparent;
+  border-style: solid;
+  border-width: 10px; 
+  margin-left: -10px; 
+}
+*/
+
+/* === ARROWS OF THE TIPS === */
+div.jpopup .img, div.jspopup .img{
+	position:absolute;
+}
+
+/* === CONTROLS FOR THE SEQUENTIAL TIPS === */
+.controls{
+	margin-top: 10px;
+}
+
+.controls .counter{
+	font-size: 16px;
+	float: right;
+}
+
+.controls .back, .controls .next, .controls .close, .controls .play{
+	font-size: 16px;
+	font-family: arial;
+	text-decoration: none;
+	float: left;
+	padding: 1px 5px;
+	border: 1px solid #C5C5C5;
+	color: black;
+	text-align: center;
+	height: 20px;
+	width: 15px;
+
+	background: #F9F9F9;
+	background-image: -moz-linear-gradient(top, #ffffff, #e6e6e6);
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#e6e6e6));
+	background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6);
+	background-image: -o-linear-gradient(top, #ffffff, #e6e6e6);
+	background-image: linear-gradient(to bottom, #ffffff, #e6e6e6);
+}
+.controls .play{
+	font-size: 15px;
+}
+
+.controls .back:hover, .controls .next:hover, .controls .close:hover, .controls .play:hover{
+  	background-image: -moz-linear-gradient(top, #ffffff, #CFCFCF);
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#CFCFCF));
+	background-image: -webkit-linear-gradient(top, #ffffff, #CFCFCF);
+	background-image: -o-linear-gradient(top, #ffffff, #CFCFCF);
+	background-image: linear-gradient(to bottom, #ffffff, #CFCFCF);
+}
+
+.controls .back{
+	border-top-left-radius: 3px;
+	border-bottom-left-radius: 3px;
+}
+
+.controls .close{
+	border-top-right-radius: 3px;
+	border-bottom-right-radius: 3px;
+}
+
+.jspopup{
+	min-width: 140px;
+}
+
+.arrowLeft{
+	background: url('../images/arrowLeft.png');
+}
+
+.arrowTop{
+	background: url('../images/arrowTop.png');
+}
+
+.arrowRight{
+	background: url('../images/arrowRight.png');
+}
+
+.arrowBottom{
+	background: url('../images/arrowBottom.png');
+}
+

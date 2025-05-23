@@ -1,0 +1,53 @@
+<link rel="stylesheet" href="../../bootstrap/css/docs.css" type="text/css" media="screen" />
+<style>	
+	.nav{
+		float:left;		
+	}
+</style>
+<%
+	String exaOpcion 	= (String)session.getAttribute("exaOpcion");
+%>
+<div class="container-fluid">
+	<ul class="nav nav-tabs">
+		<li class="datos nav-item">
+			<a class="nav-link <%=exaOpcion.equals("datos")?"active bg-secondary":""%>" href="datos" style="text-decoration:none; color:black"><i class="fas fa-user"></i> Data</a>
+		</li>
+		<li class="correo nav-item">
+			<a class="nav-link <%=exaOpcion.equals("correo")?"active bg-secondary":""%>" href="correo" style="text-decoration:none; <%=existeCorreo?"color:black":"color:purple"%>"><i class="fas fa-envelope"></i> Email</a>
+		</li>
+		<li class="direccion nav-item">
+			<a class="nav-link <%=exaOpcion.equals("direccion")?"active bg-secondary":""%>" href="direccion" style="text-decoration:none; <%=existeDireccion?"color:black":"color:purple"%>"><i class="fas fa-home"></i> Address</a>
+		</li>
+		<li class="familia nav-item">
+		   	<a class="nav-link <%=exaOpcion.equals("familia")?"active bg-secondary":""%>" href="familia" style="text-decoration:none; <%=existeFamilia?"color:black":"color:purple"%>"><i class="fas fa-users"></i> Family</a>
+		</li>
+		<li class="egreso nav-item">
+			 <a class="nav-link <%=exaOpcion.equals("egreso")?"active bg-secondary":""%>" href="egreso" style="text-decoration:none; <%=existeEgreso?"color:black":"color:purple"%>"><i class="fas fa-user-graduate"></i> Studies</a>
+		</li>
+		<li class="empleo nav-item">
+			<a class="nav-link <%=exaOpcion.equals("empleo")?"active bg-secondary":""%>" href="empleo" style="text-decoration:none; <%=existeEmpleo?"color:black":"color:purple"%>"><i class="fas fa-briefcase"></i> Employment</a>
+		</li>
+		<li class="iglesia nav-item">
+			<a class="nav-link <%=exaOpcion.equals("iglesia")?"active bg-secondary":""%>" href="iglesia" style="text-decoration:none; <%=existeIglesia?"color:black":"color:purple"%>"><i class="fas fa-church"></i> Church</a>
+		</li>
+		<li class="telefono nav-item">
+		<a class="nav-link <%=exaOpcion.equals("telefono")?"active bg-secondary":""%>" href="telefono" style="text-decoration:none; <%=existeTelefono?"color:black":"color:purple"%>"><i class="fas fa-phone-alt"></i> Phone Number</a>
+		</li>
+		<li class="redSocial nav-item">
+			<a class="nav-link <%=exaOpcion.equals("redSocial")?"active bg-secondary":""%>" href="redSocial" style="text-decoration:none; <%=existeRed?"color:black":"color:purple"%>"><i class="fas fa-thumbs-up"></i> Social Media </a>
+		</li>
+	</ul>
+</div>
+	
+
+<%--	<ul class="nav nav-list bs-docs-sidenav bs-docs-sidenav-big oculto">--%>
+<%--		 <li class="datos"><a href="datos"><i class="fas fa-arrow-circle-right"></i><i class="icon-user"></i> Datos Personales</a></li>--%>
+<%--		 <li class="correo"><a href="correo"><i class="fas fa-arrow-circle-right"></i><i class="icon-envelope"></i> Correo</a></li>--%>
+<%--		 <li class="direccion"><a href="direccion"><i class="fas fa-arrow-circle-right"></i><i class="icon-home"></i> Dirección</a></li>--%>
+<%--		 <li class="familia"><a href="familia"><i class="fas fa-arrow-circle-right"></i><i class="icon-list"></i> Familia</a></li>--%>
+<%--		  <li class="egreso"><a href="egreso"><i class="fas fa-arrow-circle-right"></i><i class="icon-ok"></i> Estudio</a></li>--%>
+<%--		 <li class="empleo"><a href="empleo"><i class="fas fa-arrow-circle-right"></i><i class="icon-briefcase"></i> Empleo</a></li>--%>
+<%--		 <li class="iglesia"><a href="iglesia"><i class="fas fa-arrow-circle-right"></i><i class="icon-heart"></i> Iglesia</a></li>--%>
+<%--		 <li class="telefono"><a href="telefono"><i class="fas fa-arrow-circle-right"></i><i class="icon-headphones"></i> Teléfono</a></li>--%>
+<%--		 <li class="social"><a href="redSocial"><i class="fas fa-arrow-circle-right"></i><i class="icon-globe"></i> Red Social</a></li>--%>
+<%--	 </ul>--%>

@@ -1,0 +1,7 @@
+<%@page errorPage="../../paginaerror.jsp"%>
+<%		
+	String sSesion			= session.getId();
+	String sUsuario			= (String) session.getAttribute("usuario");
+	String sOpciones		= (String) session.getAttribute("opciones");
+	String codPerUser		= (String)session.getAttribute("codigoPersonal");
+%>

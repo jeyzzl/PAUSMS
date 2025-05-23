@@ -1,0 +1,265 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+        <title>frequency decoder - Unobtrusive JavaScript date-picker widgit (v2) demo</title>
+        <script type="text/javascript" src="./js/datepicker.js"></script>
+        <link href="./css/datepicker.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript">
+/* The following function creates a new input field and then calls datePickerController.create();
+   to dynamically create a new date-picker widgit for it */
+function newline() {
+        var total = document.getElementById("newline-wrapper").getElementsByTagName("div").length;
+
+        // No more than ten new inputs
+        if(!total) {
+                document.getElementById("newline").style.display = "none";
+                return false;
+        }
+
+        total++;
+        
+        // Clone the first div in the series
+        var div = document.getElementById("newline-wrapper").getElementsByTagName("div")[0].cloneNode(true);
+
+        // Reset the cloned labels "for" attributes
+        var labels = div.getElementsByTagName('label');
+        
+        for(var i = 0, lbl; lbl = labels[i]; i++) {
+                // Set the new labels "for" attribute
+                if(lbl["htmlFor"]) {
+                        lbl["htmlFor"] = lbl["htmlFor"].replace(/[0-9]+/g, total);
+                } else if(lbl.getAttribute("for")) {
+                        lbl.setAttribute("for", lbl.getAttribute("for").replace(/[0-9]+/, total));
+                }
+        }
+        
+        // Reset the inputs name and id attributes
+        var inputs = div.getElementsByTagName('input');
+        for(var i = 0, inp; inp = inputs[i]; i++) {
+                // Set the new inputs id and name attribute
+                inp.id = inp.name = inp.id.replace(/[0-9]+/g, total);
+                if(inp.type == "text") inp.value = "";
+        }
+
+        // Reset the button name and id attributes
+        var inputs = div.getElementsByTagName('button');
+        for(var i = 0, inp; inp = inputs[i]; i++) {
+                inp.id = inp.name = inp.id.replace(/[0-9]+/g, total);
+        }
+
+        // Create a delete button
+        var deleteBut = document.createElement('button');
+        deleteBut.className = "delete-button";
+        deleteBut.appendChild(document.createTextNode('X'));
+        deleteBut.onclick = destroyLine;
+        
+        // Add the delete button to the wrapper div
+        div.appendChild(deleteBut);
+
+        // DOM inject the wrapper div
+        document.getElementById("newline-wrapper").appendChild(div);
+
+        // Call the create method to create and associate a new date-picker widgit with the new input
+        datePickerController.create();
+
+        // Stop the event
+        return false;
+}
+
+function resetLineNumbers() {
+        var divs = document.getElementById("newline-wrapper").getElementsByTagName("div");
+        for(var i = 0, div; div = divs[i]; i++) {
+                var inps = div.getElementsByTagName('input');
+                for(var j = 0, inp; inp = inps[j]; j++) {
+                        inp.id = inp.name = inp.id.replace(/[0-9]+/g, i+1);
+                }
+                var buts = div.getElementsByTagName('button');
+                for(var j = 0, but; but = buts[j]; j++) {
+                        but.id = but.name = but.id.replace(/[0-9]+/g, i+1);
+                }
+        }
+}
+
+function destroyLine() {
+        this.parentNode.parentNode.removeChild(this.parentNode);
+        resetLineNumbers();
+        datePickerController.create();
+}
+        </script>
+        <style type="text/css" media="screen">
+/* DEMO SPECIFIC CSS */
+body
+        {
+        padding:0 0 2em 0;
+        border:0;
+        margin:0;
+        text-align:center;
+        font-size:11px;
+        line-height:16px;
+        font-family: "Lucida Grande","Lucida Sans Unicode",geneva,verdana,sans-serif;
+        color:#545454;
+        min-width: 800px;
+        border-top:3px solid #97BC45;
+        background:#fff url(/media/gradient-e5e5e5-ffffff.gif) repeat-x 0 0;
+        }
+h2
+        {
+        font-weight:lighter;
+        font-family:georgia, times new roman, times, georgia, palatino, serif;
+        text-align:center;
+        margin-top:1em;
+        }
+input
+        {
+        margin:0;
+        border:1px solid #ccc;
+        border-top-color:#aaa;
+        border-left-color:#aaa;
+        }
+.w2em { width:2em; }
+.w4em { width:4em; }
+.w8em { width:8em; }
+label
+        {
+        font-weight:bold;
+        color:#545454;
+        }
+legend
+        {
+        color:#545454;
+        font-weight:bold;
+        }
+form
+        {
+        width:600px;
+        background:#fcfcfc;
+        border:1px solid #ccc;
+        text-align:left;
+        padding:10px;
+        margin:0 auto 5em auto;
+        }
+a:link
+        {
+        background:transparent;
+        color:#678602;
+        text-decoration:none;
+        font-weight:normal;
+        }
+a:visited
+        {
+        color:#83aa00;
+        background:transparent;
+        text-decoration:none;
+        font-weight:normal;
+        }
+a:hover
+        {
+        color:#880000;
+        background:transparent;
+        text-decoration:underline;
+        font-weight:normal;
+        }
+a:active
+        {
+        color:#000;
+        background:transparent;
+        text-decoration:none;
+        font-weight:normal;
+        }
+fieldset
+        {
+        margin-bottom:1.6em;
+        padding:1em;
+        border:1px solid #ccc;
+        }
+#newline-wrapper
+        {
+        margin-bottom:1em;
+        }
+#newline-wrapper div
+        {
+        margin-top:4px;
+        clear:both;
+        }
+#newline-wrapper div label
+        {
+        float:left;
+        width:5em;
+        text-align:right;
+        margin-right:0.2em;
+        margin-top:6px;
+        line-height:1.6em;
+        }
+kbd
+        {
+        font-size:80%;
+        background:#ccc;
+        color:#444;
+        border:outset 1px;
+        font-family: Courier, Courier New, monospace;
+        padding:1px 2px;
+        }
+.delete-button
+        {
+        color:#fff;
+        text-align:center;
+        border:1px outset #690000;
+        border-top-color:#d60000;
+        border-left-color:#d60000;
+        background:#b60000;
+        margin:0 0 0 0.5em;
+        padding:0;
+        font-size:80%;
+        }
+        </style>
+
+</head>
+<body>
+  <h2>Unobtrusive JavaScript date-picker widgit (v2)</h2>
+  <form id="testform" method="" action="">
+    <h3>Keyboard access</h3>
+    <p>N.B. Full keyboard access will not work in Opera due to it's inbuilt spatial navigation feature.</p>
+    <p><kbd>&larr;</kbd> <kbd>&rarr;</kbd> <kbd>&uarr;</kbd> <kbd>&darr;</kbd> = day navigation</p>
+
+    <p><kbd>Ctrl</kbd> + <kbd>&uarr;</kbd> = next year</p>
+    <p><kbd>Ctrl</kbd> + <kbd>&darr;</kbd> = previous year</p>
+    <p><kbd>Ctrl</kbd> + <kbd>&rarr;</kbd> = next month</p>
+
+    <p><kbd>Ctrl</kbd> + <kbd>&larr;</kbd> = previous month</p>
+    <p><kbd>Space</kbd> = todays date</p>
+    <p><kbd>Esc</kbd> = close date-picker (no date selected)</p>
+
+    <p><kbd>Return</kbd> = select highlighted date and close date-picker</p>
+    <p><kbd>2</kbd> - <kbd>7</kbd> = select the corresponding day as the first day of the week (numpad or regular keyboard)</p>
+    <p>Click and hold the next/previous buttons to activate the timed counter i.e. there's no need to repeatedly click the buttons.</p>
+
+    <fieldset>
+      <legend>DatePicker test</legend>
+      <p>The following date-pickers have a specified date range of 11/08/2006 to 13/09/2007. Dates outside of this range are unselectable.</p>
+      <p>The days Monday and Tuesday have also been specified as being unselectable.</p>
+      <p>View the page source should you wish to know how the new input boxs are created.</p>
+      <p>The datePicker should also fully cover the selectList in Internet Explorer when activated.</p>
+
+      <div id="newline-wrapper">
+        <div>
+          <label id="label-1" for="date-1">dob : </label>
+          <input type="text" class="w2em" id="date-1-dd" name="date-1-dd" value="" maxlength="2" /> /
+          <input type="text" class="w2em" id="date-1-mm" name="date-1-mm" value="" maxlength="2" /> /
+          <input type="text" class="w4em format-d-m-y highlight-days-67 range-low-11-08-2006 range-high-13-09-2007 disable-days-12 split-date" id="date-1" name="date-1" value="" maxlength="4" />
+        </div>
+      </div>
+      <p>
+      <select name="ietest" style="margin-left:5.2em;">
+        <option value="1">This is a test selectlist</option>
+        <option value="2">that should be covered by</option>
+        <option value="3">the datepicker even in IE</option>
+      </select>
+      </p>
+      <a href="#" onclick="newline(); return false;" id="newline">Create New Input</a>
+    </fieldset>
+    <p>View the related &#8220;<a href="http://www.frequency-decoder.com/2006/10/02/unobtrusive-date-picker-widgit-update/">language in the lab</a>&#8221; post for this demo.</p>
+  </form>
+
+</body>
+</html>
+

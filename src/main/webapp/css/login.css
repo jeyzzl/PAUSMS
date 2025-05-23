@@ -1,0 +1,81 @@
+body{
+	background: url(../imagenes/bg-login.png);
+}
+
+.logo{
+	width: 500px;
+	margin: 70px auto;
+	text-align: center;
+}
+
+.logo h1{
+	font-size: 35px;
+	color: white;
+	color: #222;
+	text-shadow: 0px 1px 2px #555;
+	letter-spacing: 1px;
+}
+
+.well-white{
+	width: 500px;
+	margin: auto;
+	border: 1px solid rgba(0,0,0,.3);
+	border-radius: 5px;
+	background: white;
+	
+	-webkit-box-sizing:border-box;
+	   -moz-box-sizing:border-box;
+	    -ms-box-sizing:border-box;
+	        box-sizing:border-box;
+
+	-webkit-box-shadow: 1px 2px 12px -2px rgba(0,0,0,.5);
+	   -moz-box-shadow: 1px 2px 12px -2px rgba(0,0,0,.5);
+	     -o-box-shadow: 1px 2px 12px -2px rgba(0,0,0,.5);
+		-ms-box-shadow: 1px 2px 12px -2px rgba(0,0,0,.5);
+		    box-shadow: 1px 2px 12px -2px rgba(0,0,0,.5);
+}
+
+.page-header{
+	padding-top: 9px;
+	padding-left: 20px;
+	margin: 0;
+}
+
+.page-header h1{
+	font-size: 25px;
+	margin: 0;
+}
+
+.well-white form{
+
+	margin-top: 20px;
+	padding: 0 20px;
+
+	box-sizing:border-box;
+}
+
+.well-white form input[type="text"], .well-white form input[type="password"]{
+	width: 100%;
+	
+	-webkit-box-sizing: border-box;
+	   -moz-box-sizing: border-box;
+	    -ms-box-sizing: border-box;
+	        box-sizing: border-box;
+	
+	height: 45px;
+	
+	padding-left:18px;
+}
+
+.loginError{
+	color: #b94a48;
+	display:none;
+}
+
+.footer{
+	position: absolute;
+	bottom:10px;
+	color: white;
+	width: 100%;
+	text-align: center;
+}

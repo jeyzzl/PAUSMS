@@ -1,0 +1,56 @@
+div#head
+{
+	height:65px;
+	width:1000px;
+	position:absolute;
+	top:0px;
+	left:0px;
+	border:none
+}
+
+div#menu
+{
+	height:530px;
+	width:160px;
+	position:absolute;
+	top:64px;
+	left:0px;
+	border:none
+}
+
+div#principal
+{
+	height:530px;
+	width:840px;
+	position:absolute;
+	top:64px;
+	left:160px;
+	border:none
+}
+
+div#ocultaHead
+{
+	height:10px;
+	width:10px;
+	position:absolute;
+	top:10px;
+	left:980px
+}
+
+div#ocultaMenu
+{
+	height:10px;
+	width:10px;
+	position:absolute;
+	top:560px;
+	left:0px
+}
+
+div#imprime
+{
+	height:20px;
+	width:20px;
+	position:absolute;
+	top:10px;
+	left:150px
+}

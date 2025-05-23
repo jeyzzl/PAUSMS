@@ -1,0 +1,25 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-AcademicoApplication<pau>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "aca.AcademicoApplication",
+            "projectName": "pau",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env",
+            "vmArgs": " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=50133 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=pau"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-TraspasoArchivos<pau>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "aca.archivos.TraspasoArchivos",
+            "projectName": "pau",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

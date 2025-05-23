@@ -1,0 +1,39 @@
+
+#tablewrapper {width:100%;}
+#tableheader {height:100%;}
+.search {float:left; padding:6px; background:#fff;border-radius:0px;width:324px;height:32px;}
+
+.search input{
+	line-height:0;
+}
+#tableheader select {float:left; font-size:12px; width:125px; padding:2px 4px 4px;height:29px;}
+.details {float:right; padding-top:12px}
+.details div {float:left; margin-left:15px; font-size:12px;position:relative;top:4px;}
+.tinytable {border-left:1px solid #c6d5e1; border-top:1px solid #c6d5e1; border-bottom:none}
+.tinytable th h3 {font-size:14px; padding:0px 0px 0px;/*position:relative;top:6px;*/margin-bottom: 0px;}
+.tinytable td {padding:2px 5px 4px; border-bottom:1px solid #c6d5e1; border-right:1px solid #c6d5e1}
+.tinytable .head h3 {background:url(images/sort.gif) 7px center no-repeat; cursor:pointer; padding-left:18px}
+.tinytable .desc h3 {background:url(images/desc.gif) 7px center no-repeat; cursor:pointer; padding-left:18px}
+.tinytable .asc h3 {background:url(images/asc.gif) 7px  center no-repeat; cursor:pointer; padding-left:18px}
+.tinytable .head:hover, .tinytable .desc:hover, .tinytable .asc:hover {color:#dce6ee;}
+.tinytable .evenrow td {background:#fff}
+.tinytable .oddrow td {background:#ecf2f6}
+.tinytable td.evenselected {background:#E7EEF3;border-right:1px solid #424242;border-left:1px solid #424242;}
+.tinytable td.oddselected {background:#E7EEF3;border-right:1px solid #424242;border-left:1px solid #424242;}
+.tinytable tfoot {background:#fff; font-weight:bold}
+.tinytable tfoot td {padding:6px 8px 8px}
+#tablefooter {height:15px;padding-top:7px;}
+#tablenav {float:left}
+#tablenav img {cursor:pointer}
+#tablenav div {float:left; margin-right:15px;position:relative;top:3px;}
+#tablelocation {float:right; font-size:12px}
+#tablelocation select {margin-right:3px}
+#tablelocation div {float:left; margin-left:15px}
+.page {margin-top:4px; font-style:italic}
+#selectedrow td {background:white;}
+/*
+.text-right{text-align: right !important;} 
+.text-center{text-align: center !important;}
+.text-left{text-align: left !important;}
+*/
+

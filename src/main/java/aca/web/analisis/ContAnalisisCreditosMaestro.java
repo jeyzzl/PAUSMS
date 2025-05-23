@@ -1,0 +1,58 @@
+package aca.web.analisis;
+
+import jakarta.servlet.http.HttpServletRequest;
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Controller;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+public class ContAnalisisCreditosMaestro {
+
+	@Autowired
+	@Qualifier("dsEnoc")
+	private DataSource enoc;
+	
+	@Autowired
+	@Qualifier("jdbcEnoc")
+	private JdbcTemplate enocJdbc;
+	
+	
+	public void enviarConEnoc(HttpServletRequest request, String url){
+		// Enviar de la conexión
+		try{ 
+			request.setAttribute("conEnoc", enoc.getConnection());
+		}catch(Exception ex){ 
+			System.out.println(url+" "+ex);
+		}
+	}
+	
+	@RequestMapping("/analisis/creditosMaestro/cargas")
+	public String analisisCreditosMaestroCargas(HttpServletRequest request){
+		enviarConEnoc(request,"Error-aca.ContanalisisCreditosMaestro|analisisCreditosMaestroCargas:");
+		return "analisis/creditosMaestro/cargas";
+	}	
+
+	@RequestMapping("/analisis/creditosMaestro/detallado")
+	public String analisisCreditosMaestroDetallado(HttpServletRequest request){
+		enviarConEnoc(request,"Error-aca.ContanalisisCreditosMaestro|analisisCreditosMaestroDetallado:");
+		return "analisis/creditosMaestro/detallado";
+	}	
+	
+	@RequestMapping("/analisis/creditosMaestro/maestros")
+	public String analisisCreditosMaestroMaestros(HttpServletRequest request){
+		enviarConEnoc(request,"Error-aca.ContanalisisCreditosMaestro|analisisCreditosMaestroMaestros:");
+		return "analisis/creditosMaestro/maestros";
+	}	
+
+	@RequestMapping("/analisis/creditosMaestro/modalidades")
+	public String analisisCreditosMaestroModalidades(HttpServletRequest request){
+		enviarConEnoc(request,"Error-aca.ContanalisisCreditosMaestro|analisisCreditosMaestroModalidades:");
+		return "analisis/creditosMaestro/modalidades";
+	}	
+	
+}

@@ -1,0 +1,18 @@
+<script type="text/javascript">
+	ayuda();
+	//changeInputs();
+</script>
+<%
+	}catch (SQLException se){            
+		String rutaFinal = ((jakarta.servlet.http.HttpServletRequest)request).getRequestURI();
+        System.out.println("*Error: "+se+":"+rutaFinal);
+        conEnoc = (java.sql.Connection)request.getAttribute("conEnoc");
+        try { conEnoc.close(); System.out.println("Close:"+rutaFinal); } catch (Exception ignore) { }
+        request.removeAttribute("conEnoc");    
+	}finally{
+		String rutaFinal = ((jakarta.servlet.http.HttpServletRequest)request).getRequestURI();
+	    //conEnoc = (java.sql.Connection)request.getAttribute("conEnoc");
+	    try { conEnoc.close(); System.out.println("Close:"+rutaFinal); } catch (Exception ignore) { }    
+	    request.removeAttribute("conEnoc");    		
+	}	
+%>
