@@ -1345,6 +1345,7 @@ public class ContAmdlineaAdmision {
 							alumAcademico.setModalidadId(admAcademico.getModalidad());
 							alumAcademico.setExtensionId("99");
 							alumAcademico.setPrepaLugar("0");
+							alumAcademico.setAcomodoId(admSolicitud.getTipoAcomodo());
 							
 							alumEstudio.setCodigoPersonal(matricula);
 							alumEstudio.setCompleto(admEstudio.getCompleto());
@@ -2748,7 +2749,7 @@ public class ContAmdlineaAdmision {
 			docAlum.setUsuario(codigoPersonal);		
 			docAlum.setComentario(request.getParameter("Comentario"));
 			admDocAlumDao.updateReg(docAlum);			
-		}else if(accion.equals("5")){	
+		}else if(accion.equals("5")){ // AUTORIZAR DOCUMENTOS	
 			admSolicitudDao.updateEstadoAndFecha(folio,"4");
 			admSolicitud = admSolicitudDao.mapeaRegId(folio);
 			
@@ -2818,13 +2819,17 @@ public class ContAmdlineaAdmision {
 		HashMap<String, AdmDocumento> mapDocumentos	= admDocumentoDao.mapaDocumentos();
 		HashMap<String, AdmFormato> mapFormatos		= admFormatoDao.mapaFormatos();
 		HashMap<String, AdmDocAlum> mapDocAlum		= admDocAlumDao.mapaDocumentosAlumno(folio);
+		System.out.println(mapDocAlum.size());
+		System.out.println(lisRequisitos.size());
 
 		boolean docAutorizados = true;
 
 		for(AdmRequisito admRequisito : lisRequisitos){
+			System.out.println(admRequisito.getDocumentoId());
 			if(mapDocAlum.containsKey(admRequisito.getDocumentoId())){
+				System.out.println(admRequisito.getDocumentoId());
 				String estadoDoc = mapDocAlum.get(admRequisito.getDocumentoId()).getEstado();
-				if(!estadoDoc.equals("A")){
+				if(!estadoDoc.equals("A")){ // E = Enviados, A = Autorizados.
 					docAutorizados = false; // If any document is not authorized, set docAutorizados to false
 					break; // Exit the loop early, as we already know the result
 				}

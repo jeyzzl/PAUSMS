@@ -1,6 +1,11 @@
 // Bean de datos personales del alumno 
 package  aca.alumno.spring;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import aca.parametros.spring.Parametros;
+import aca.parametros.spring.ParametrosDao;
+
 public class AlumPersonal{
  	private String codigoPersonal;
  	private String nombre;
@@ -35,7 +40,7 @@ public class AlumPersonal{
 	private String resEstadoId;
 	private String resCiudadId;
 	private String sync;
-  	
+
  	public AlumPersonal(){
  		codigoPersonal		= "0";
  		nombre				= "-";
@@ -47,10 +52,10 @@ public class AlumPersonal{
  		estadoCivil			= "-";
  		religionId			= "1";
  		bautizado			= "-";
- 		paisId				= "1";
+ 		paisId				= "153";
  		estadoId			= "1";
  		ciudadId			= "1";
- 		nacionalidad 		= "1";
+ 		nacionalidad 		= "153";
  		email				= "-";
  		curp				= "-";
  		estado				= "-";
@@ -65,7 +70,7 @@ public class AlumPersonal{
  		fBautizado			= "01/01/2000";
  		culturalId			= "1";
  		regionId			= "1";
-		resPaisId 			= "1";
+		resPaisId 			= "153";
 		resEstadoId 		= "1";
 		resCiudadId 		= "1";
 		sync 				= "S";

@@ -30,7 +30,9 @@ public class AdmUsuarioMapper implements RowMapper<AdmUsuario> {
 		objeto.setEstado(rs.getString("ESTADO"));	
 		objeto.setCodigo(rs.getString("CODIGO"));
 		objeto.setNacionalidad(rs.getString("NACIONALIDAD"));
-		
+		objeto.setEmpleado(rs.getString("EMPLEADO"));
+		objeto.setInstitucionId(rs.getString("INSTITUCION_ID"));
+
 		return objeto;
 	}
 

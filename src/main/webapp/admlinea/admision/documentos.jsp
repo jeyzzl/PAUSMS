@@ -122,8 +122,11 @@
 	String colorMal 	= "#AE2113";
 	String color23 		= "#B0B02F";	
 	
-	String carreraId = admAcademico.getCarreraId();
-	String modalidad = admAcademico.getModalidad();	 
+	String carreraId 		= admAcademico.getCarreraId();
+	String modalidad 		= admAcademico.getModalidad();	 
+    String nivelEstudio 	= admSolicitud.getNivelEstudio();
+    String tipo 			= admSolicitud.getTipo();
+    String tipoAplicante 	= admSolicitud.getTipoAplicante();
 %>
 <body>
 <div class="container-fluid">
@@ -135,14 +138,7 @@
 <% 		}else if(pagina.equals("Proceso") || pagina.equals("Documentos")){%>
     	<a class="btn btn-primary" href="mostrarProceso?Folio=<%=folio %>"><i class="fas fa-arrow-left"></i></a>&nbsp;&nbsp;    				
 <%		}%>
-<%-- <% 		if(existeAdmin || existeAsesor || existebety){%> 
-			<a class="btn btn-danger" onclick="borrar('<%=folio%>');"><spring:message code="aca.Borrar"/></a>&nbsp;&nbsp;
-<% 			if(documentosExtras >= 1){%>			
-			Uploaded documents that are not required: <%=documentosExtras%>&nbsp;&nbsp;  				
-    			<a class="btn btn-danger" onclick="borrarExtras('<%=folio%>', '<%=admAcademico.getCarreraId()%>');"><spring:message code="aca.Borrar"/> extras</a>
-<% 			}
-		}
-%> --%>
+
 	</div>
 	<div class="alert alert-info">
 		<b>Level:</b> <%=nivelNombre%>
@@ -167,7 +163,7 @@
 			<th width="26%"><b><spring:message code="aca.Documento"/></b></th>
 			<th width="10%"><b><spring:message code="aca.Imagenes"/></b></th>
 			<th width="10%"><b><spring:message code="aca.Archivos"/></b></th>
-			<th width="14%"><b><spring:message code="aca.Status"/></b></th>
+			<%-- <th width="14%"><b><spring:message code="aca.Status"/></b></th> --%>
 			<th width="12%"><b><spring:message code="aca.Comentario"/></b></th>
 			<th width="18%"><b><spring:message code="aca.Autorizacion"/></b></th>
 <%-- 			<th width="11%"><strong><spring:message code="aca.Carta"/></strong></th> --%>
@@ -177,7 +173,7 @@
 
 		int cont = 0;
 		for(AdmRequisito requisito : lisRequisitos){
-			System.out.println(requisito.getDocumentoId());
+			// VALIDATE MODALIDAD
 			boolean existeModalidad = false; 
 			String [] modalidades = requisito.getModalidades().split("-");
 			for(String mod : modalidades){
@@ -186,7 +182,37 @@
 					break;
 				}
 			}
-			if(!existeModalidad) continue;
+            // VALIDATE NIVEL
+            boolean existeNivel = false;
+            String[] niveles = requisito.getNiveles().split("-");
+            for(String ne : niveles){
+                if(ne.equals(nivelEstudio)){
+                    existeNivel = true;
+                    break;
+                }
+            }
+
+            // VALIDATE TIPO
+            boolean existeTipo = false;
+            String[] tipos = requisito.getTipos().split("-");
+            for(String tipoS : tipos){
+                if(tipoS.equals(tipo)){
+                    existeTipo = true;
+                    break;
+                }
+            }
+
+            // VALIDATE TIPO APLICANTE
+            boolean existeTipoA = false;
+            String[] nacionalidades = requisito.getNacionalidades().split("-");
+            for(String nacionalidad : nacionalidades){
+                if(nacionalidad.equals(tipoAplicante)){
+                    existeTipoA = true;
+                    break;
+                }
+            }
+
+			if(!existeModalidad || !existeNivel || !existeTipo  || !existeTipoA) continue;
 			else cont++;
 			
 			boolean coordinador = false;
@@ -295,7 +321,7 @@
 			}			 
 %>
 			</td>					
-			<td align="center">
+			<%-- <td align="center">
 		   		<%	if(!envioDocumento && mostrar){ %>
 					<button type="button" class="btn btn-primary" onclick="aprobarSinEnvio('<%=requisito.getDocumentoId()%>', '<%=folio %>', '<%=pagina %>');">Approve</button>
 			   		<button type="button" class="btn btn-danger" onclick="noAprobarSinEnvio('<%=requisito.getDocumentoId()%>', '<%=folio %>', '<%=pagina %>');">Disapprove</button>
@@ -342,7 +368,7 @@
 	 				else if(admDocAlum.getEstado().equals("A") && admSolicitud.getEstado().equals("4")){ %>
 					<font size="3" color="<%=colorBien %>"><b>Approved</b></font>
 				<%	} %>						
-			</td>
+			</td> --%>
 			<form name="com<%=admDocAlum.getDocumentoId()%>" action="addMensaje" method="post">
 			<input name="Folio" type="hidden" value="<%=folio %>" />
 			<input name="DocumentoId" type="hidden" value="<%=admDocAlum.getDocumentoId()%>" />
@@ -367,26 +393,26 @@
 %>
 		</table>
 		<br>
-	<%		
-		if((!accion.equals("5") && Integer.parseInt(admSolicitud.getEstado())<=3)){ %>
-			<table style="margin: 0 auto;">
-				<tr>
-			    	<td colspan="3" align="center">				    		
-			    		<input type="button" class="btn btn-success btn-large" value="Pre-Authorize" onclick="window.location.href='documentos?Folio=<%=folio %>&Accion=10';">	
-	<%	if(docAutorizados){
-	%>				
-			    		<input type="button" class="btn btn-primary btn-large" value="Authorize" onclick="window.location.href='documentos?Folio=<%=folio %>&Accion=5';">					
-	<%
+<%-- <%	if((!accion.equals("5") && Integer.parseInt(admSolicitud.getEstado())<=3)){ %>
+		<table style="margin: 0 auto;">
+			<tr>
+				<td colspan="3" align="center">				    		
+					<input type="button" class="btn btn-success btn-large" value="Pre-Authorize" onclick="window.location.href='documentos?Folio=<%=folio %>&Accion=10';">	
+<%	
+		if(docAutorizados){
+%>				
+					<input type="button" class="btn btn-primary btn-large" value="Authorize" onclick="window.location.href='documentos?Folio=<%=folio %>&Accion=5';">					
+<%
 		}else{
-	%>
-						<input type="button" disabled class="btn btn-primary btn-large" value="Authorize">
-	<%	}%>
-					</td>
-			  	</tr>
-			</table>
-	<%	}
+%>
+					<input type="button" disabled class="btn btn-primary btn-large" value="Authorize">
+<%		}%>
+				</td>
+			</tr>
+		</table>
+<%	} %> --%>
 			
-	}else{%>
+<%	}else{%>
 		<script>document.getElementById('clickButton').style.display='none';</script> 
 		<table class="table table-condensed" style="width:80%">
 			<tr><th colspan="2"><spring:message code='aca.Comentario'/></th></tr>

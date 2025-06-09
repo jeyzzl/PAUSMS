@@ -4,11 +4,13 @@ public class AdmAcomodo {
 	private String acomodoId;
 	private String acomodoNombre;
 	private String acomodoTipo;
+	private String acomodoGenero;
 		
 	public AdmAcomodo(){
 		acomodoId 			= "";
 		acomodoNombre 		= "";
 		acomodoTipo 		= "";
+		acomodoGenero 		= "";
 	}
 
 	public String getAcomodoId() {
@@ -32,6 +34,12 @@ public class AdmAcomodo {
 		this.acomodoTipo = acomodoTipo;
 	}
 
-	
+	public String getAcomodoGenero() {
+		return acomodoGenero;
+	}
+
+	public void setAcomodoGenero(String acomodoGenero) {
+		this.acomodoGenero = acomodoGenero;
+	}
 	
 }

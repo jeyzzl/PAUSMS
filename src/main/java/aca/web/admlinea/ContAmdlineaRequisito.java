@@ -122,7 +122,11 @@ public class ContAmdlineaRequisito {
 			admRequisito.setAutorizar(requisito.getAutorizar());
 			admRequisito.setCarreraId(carreraDestino);
 			admRequisito.setDocumentoId(requisito.getDocumentoId());
-			admRequisito.setModalidades(requisito.getModalidades());				
+			admRequisito.setModalidades(requisito.getModalidades());		
+			admRequisito.setNiveles(requisito.getNiveles());
+			admRequisito.setTipos(requisito.getTipos());
+			admRequisito.setNacionalidades(requisito.getNacionalidades());	
+			admRequisito.setEstadosCiviles(requisito.getEstadosCiviles());	
 			if(admRequisitoDao.existeReg(carreraDestino, requisito.getDocumentoId()) ){
 				admRequisitoDao.updateReg(admRequisito);
 			}else{
@@ -205,11 +209,36 @@ public class ContAmdlineaRequisito {
 				strmod 	+= modalidad.getModalidadId()+"-"; 
 			}			
 	   	}		
+
+		String strNivel = "-";
+		if(request.getParameter("chkNivelU")!=null) strNivel += "U"+"-";
+		if(request.getParameter("chkNivelG")!=null) strNivel += "P"+"-";
+
+		String strTipo = "-";
+		if(request.getParameter("chkTipoS")!=null) strTipo += "S"+"-";
+		if(request.getParameter("chkTipoN")!=null) strTipo += "N"+"-";
+
+		String strNac = "-";
+		if(request.getParameter("chkNacN")!=null) strNac += "N"+"-";
+		if(request.getParameter("chkNacI")!=null) strNac += "I"+"-";
+
+		String strEdoCivil = "-";
+		if(request.getParameter("chkEdoS")!=null) strEdoCivil += "S"+"-";
+		if(request.getParameter("chkEdoM")!=null) strEdoCivil += "M"+"-";
+		if(request.getParameter("chkEdoD")!=null) strEdoCivil += "D"+"-";
+		if(request.getParameter("chkEdoV")!=null) strEdoCivil += "V"+"-";
+
+		// System.out.println(strmod+":"+strNivel+":"+strTipo+":"+strNac+":"+strEdoCivil);
+
 		admRequisito.setCarreraId(carreraId);
 		admRequisito.setDocumentoId(documentoId);
 		admRequisito.setModalidades(strmod);
 		admRequisito.setAutorizar(autorizar);
 		admRequisito.setRequerido(requerido);
+		admRequisito.setNiveles(strNivel);
+		admRequisito.setTipos(strTipo);
+		admRequisito.setNacionalidades(strNac);
+		admRequisito.setEstadosCiviles(strEdoCivil);
 		if(admRequisitoDao.existeReg(carreraId, documentoId)==false){
 			if(admRequisitoDao.insertReg(admRequisito)){
 				mensaje = "Saved";
@@ -222,5 +251,25 @@ public class ContAmdlineaRequisito {
 		
 		return "redirect:/admlinea/requisito/modalidades?Facultad="+facultadId+"&Carrera="+carreraId+"&Documento="+documentoId+"&Mensaje="+mensaje;
 	}
+
+	@RequestMapping("/admlinea/requisito/eliminarRequisito")
+	public String admlineaRequisitoEliminarRequisito(HttpServletRequest request, Model modelo){
+		
+		String facultadId			= request.getParameter("Facultad")==null?"0":request.getParameter("Facultad");
+		String carreraId			= request.getParameter("Carrera")==null?"0":request.getParameter("Carrera");
+		String documentoId			= request.getParameter("Documento")==null?"0":request.getParameter("Documento");
+		String mensaje 				= "-";
+
+		if(admRequisitoDao.existeReg(carreraId, documentoId)){
+			if(admRequisitoDao.deleteReg(carreraId, documentoId)){
+				mensaje = "Removed Requirements";
+			}else{
+				mensaje = "Error deleting requirements";
+			}
+		}else{
+			mensaje = "No record found";
+		}
 	
+		return "redirect:/admlinea/requisito/documentos?Facultad="+facultadId+"&Carrera="+carreraId+"&Mensaje="+mensaje;
+	}
 }

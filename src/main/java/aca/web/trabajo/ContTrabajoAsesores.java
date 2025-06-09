@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import aca.cred.spring.CredDependienteDao;
 import aca.emp.spring.EmpMaestroDao;
 import aca.trabajo.spring.*;
 import aca.vista.spring.Maestros;
@@ -16,6 +16,8 @@ import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 public class ContTrabajoAsesores {
+
+    private final CredDependienteDao credDependienteDao;
 
     private final TrabAlumDao trabAlumDao;
 
@@ -31,8 +33,9 @@ public class ContTrabajoAsesores {
     @Autowired
     MaestrosDao maestrosDao;
 
-    ContTrabajoAsesores(TrabAlumDao trabAlumDao) {
+    ContTrabajoAsesores(TrabAlumDao trabAlumDao, CredDependienteDao credDependienteDao) {
         this.trabAlumDao = trabAlumDao;
+        this.credDependienteDao = credDependienteDao;
     }
 
     @RequestMapping("/trabajo/asesores/listado")
@@ -69,8 +72,8 @@ public class ContTrabajoAsesores {
         String deptId           = request.getParameter("DeptId")==null?"0":request.getParameter("DeptId");
 		
 		TrabAsesor asesor = new TrabAsesor();
-		if (trabAsesorDao.existeReg(codigoPersonal)) {
-			asesor = trabAsesorDao.mapeaRegId(codigoPersonal);
+		if (trabAsesorDao.existeReg(codigoPersonal, deptId)) {
+			asesor = trabAsesorDao.mapeaRegId(codigoPersonal, deptId);
 		}else{
 			asesor.setCodigoPersonal(codigoPersonal);
 			asesor.setDeptId(deptId);
@@ -105,10 +108,10 @@ public class ContTrabajoAsesores {
         asesor.setFecha(fecha);
         asesor.setStatus(status);
 
-		System.out.println(deptId);
-		System.out.println(fecha);
+		// System.out.println(deptId);
+		// System.out.println(fecha);
 				
-		if (trabAsesorDao.existeReg(codigoPersonal)) {
+		if (trabAsesorDao.existeReg(codigoPersonal, deptId)) {
 			if (trabAsesorDao.updateReg(asesor)) {
 				mensaje = "Updated";
 			} else {
@@ -121,18 +124,19 @@ public class ContTrabajoAsesores {
 				mensaje = "Error Saving";
 			}
 		}
-		return "redirect:/trabajo/asesores/editarAsesor?CodigoPersonal=" + asesor.getCodigoPersonal() + "&Mensaje=" + mensaje;
+		return "redirect:/trabajo/asesores/editarAsesor?CodigoPersonal="+asesor.getCodigoPersonal()+"&DeptId="+deptId+"&Mensaje="+mensaje;
 	}
 
     @RequestMapping("/trabajo/asesores/borrar")
 	public String trabajoAsesoresBorrar(HttpServletRequest request, Model model) {
+		String codigoPersonal 	= request.getParameter("CodigoPersonal") == null ? "0" : request.getParameter("CodigoPersonal");
+		String deptId 			= request.getParameter("DeptId") == null ? "0" : request.getParameter("DeptId");
 
-		String codigoPersonal = request.getParameter("CodigoPersonal") == null ? "0" : request.getParameter("CodigoPersonal");
-		if (trabAsesorDao.existeReg(codigoPersonal)) {
-			trabAsesorDao.deleteReg(codigoPersonal);
+		if (trabAsesorDao.existeReg(codigoPersonal, deptId)) {
+			trabAsesorDao.deleteReg(codigoPersonal, deptId);
 		}
 
-		return "redirect:/trabajo/asesores/listado";
+		return "redirect:/trabajo/asesores/listado?DeptId="+deptId;
 	}
     
 }

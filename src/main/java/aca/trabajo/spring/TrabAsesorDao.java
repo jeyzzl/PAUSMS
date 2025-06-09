@@ -38,8 +38,8 @@ public class TrabAsesorDao {
 	public boolean updateReg( TrabAsesor asesor ) {
 		boolean ok = false;		
 		try{
-			String comando = "UPDATE ENOC.TRAB_ASESOR SET DEPT_ID = TO_NUMBER(?,'999'), FECHA = TO_DATE(?, 'DD-MM-YYYY hh24:mi:ss'), STATUS = ? WHERE CODIGO_PERSONAL = ?";
-			Object[] parametros = new Object[] {asesor.getDeptId(), asesor.getFecha(), asesor.getStatus(), asesor.getCodigoPersonal(), };
+			String comando = "UPDATE ENOC.TRAB_ASESOR SET DEPT_ID = TO_NUMBER(?,'999'), FECHA = TO_DATE(?, 'DD-MM-YYYY hh24:mi:ss'), STATUS = ? WHERE CODIGO_PERSONAL = ? AND DEPT_ID = ?";
+			Object[] parametros = new Object[] {asesor.getDeptId(), asesor.getFecha(), asesor.getStatus(), asesor.getCodigoPersonal(), asesor.getDeptId()};
 			if (enocJdbc.update(comando,parametros)==1){
 				ok = true;
 			}			
@@ -50,11 +50,11 @@ public class TrabAsesorDao {
 		return ok;
 	}	
 	
-	public boolean deleteReg( String codigoPersonal ) {
+	public boolean deleteReg( String codigoPersonal, String deptId ) {
 		boolean ok = false;		
 		try{
-			String comando = "DELETE FROM ENOC.TRAB_ASESOR WHERE CODIGO_PERSONAL = ?";
-			Object[] parametros = new Object[] {codigoPersonal};
+			String comando = "DELETE FROM ENOC.TRAB_ASESOR WHERE CODIGO_PERSONAL = ? AND DEPT_ID = ?";
+			Object[] parametros = new Object[] {codigoPersonal, deptId};
 			if (enocJdbc.update(comando,parametros)==1){
 				ok = true;
 			}		
@@ -65,14 +65,14 @@ public class TrabAsesorDao {
 		return ok;
 	}
 	
-	public TrabAsesor mapeaRegId(  String deptId ) {
+	public TrabAsesor mapeaRegId(  String codigoPersonal, String deptId ) {
 		
 		TrabAsesor asesor 	= new TrabAsesor();		
 		try{
-			String comando = "SELECT COUNT(*) FROM ENOC.TRAB_ASESOR WHERE CODIGO_PERSONAL = ?";
-			Object[] parametros = new Object[] {deptId};
+			String comando = "SELECT COUNT(*) FROM ENOC.TRAB_ASESOR WHERE CODIGO_PERSONAL = ? AND DEPT_ID = ?";
+			Object[] parametros = new Object[] {codigoPersonal, deptId};
 			if (enocJdbc.queryForObject(comando, Integer.class, parametros) >= 1){
-				comando = "SELECT CODIGO_PERSONAL, DEPT_ID, FECHA, STATUS FROM ENOC.TRAB_ASESOR WHERE CODIGO_PERSONAL = ?";
+				comando = "SELECT CODIGO_PERSONAL, DEPT_ID, FECHA, STATUS FROM ENOC.TRAB_ASESOR WHERE CODIGO_PERSONAL = ? AND DEPT_ID = ?";
 				asesor = enocJdbc.queryForObject(comando, new TrabAsesorMapper(), parametros);
 			}						
 		}catch(Exception ex){
@@ -83,11 +83,11 @@ public class TrabAsesorDao {
 		return asesor;
 	}
 	
-	public boolean existeReg( String codigoPersonal ) {
+	public boolean existeReg( String codigoPersonal, String deptId ) {
 		boolean 		ok 		= false;		
 		try{
-			String comando = "SELECT COUNT(CODIGO_PERSONAL) FROM ENOC.TRAB_ASESOR WHERE CODIGO_PERSONAL = ?";
-			Object[] parametros = new Object[] {codigoPersonal};
+			String comando = "SELECT COUNT(CODIGO_PERSONAL) FROM ENOC.TRAB_ASESOR WHERE CODIGO_PERSONAL = ? AND DEPT_ID = ?";
+			Object[] parametros = new Object[] {codigoPersonal, deptId};
 			if (enocJdbc.queryForObject(comando, Integer.class, parametros) >= 1){
 				ok = true;
 			}			
@@ -158,7 +158,7 @@ public class TrabAsesorDao {
 		
 		List<TrabAsesor> lista = new ArrayList<TrabAsesor>();		
 		try{
-			String comando = "SELECT CODIGO_PERSONAL, DEPT_ID, FECHA, STATUS FROM ENOC.TRAB_ASESOR WHERE STATUS = 'A'"+ orden;				
+			String comando = "SELECT CODIGO_PERSONAL, MAX(DEPT_ID) AS DEPT_ID, MAX(FECHA) AS FECHA, STATUS FROM ENOC.TRAB_ASESOR WHERE STATUS = 'A' GROUP BY CODIGO_PERSONAL, STATUS"+ orden;				
 			lista = enocJdbc.query(comando, new TrabAsesorMapper());
 		}catch(Exception ex){
 			System.out.println("Error - aca.catalogo.spring.TrabAsesorDao|lisActivos|:"+ex);

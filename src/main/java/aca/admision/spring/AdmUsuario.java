@@ -22,6 +22,8 @@ public class AdmUsuario{
 	private String estado;
 	private String codigo;
 	private String nacionalidad;
+	private String empleado;
+	private String institucionId;
 
 	public AdmUsuario() {
 		usuarioId 		= "0";
@@ -43,6 +45,8 @@ public class AdmUsuario{
 		estado			= "0";
 		codigo			= "0";
 		nacionalidad 	= "0";
+		empleado		= "N";
+		institucionId 	= "0";
 	}
 	
 	public String getUsuarioId() {
@@ -181,4 +185,20 @@ public class AdmUsuario{
 	public void setNacionalidad(String nacionalidad) {
 		this.nacionalidad = nacionalidad;
 	}
+	
+	public String getEmpleado() {
+		return empleado;
+	}
+	public void setEmpleado(String empleado) {
+		this.empleado = empleado;
+	}
+
+	public String getInstitucionId() {
+		return institucionId;
+	}
+	public void setInstitucionId(String institucionId) {
+		this.institucionId = institucionId;
+	}
+
+	
 }

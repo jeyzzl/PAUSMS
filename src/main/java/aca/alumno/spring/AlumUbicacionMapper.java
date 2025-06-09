@@ -36,6 +36,14 @@ public class AlumUbicacionMapper implements RowMapper<AlumUbicacion>{
 		objeto.setVacuna(rs.getString("VACUNA"));
 		objeto.setDescripcionVacuna(rs.getString("DESCRIPCION_VACUNA"));
 		objeto.setRecogidaId(rs.getString("RECOGIDA_ID"));
+		objeto.setpPais(rs.getString("P_PAIS"));
+		objeto.setpEstado(rs.getString("P_ESTADO"));
+		objeto.setpCiudad(rs.getString("P_CIUDAD"));
+		objeto.setpOrigen(rs.getString("P_ORIGEN"));
+		objeto.setmPais(rs.getString("M_PAIS"));
+		objeto.setmEstado(rs.getString("M_ESTADO"));
+		objeto.setmCiudad(rs.getString("M_CIUDAD"));
+		objeto.setmOrigen(rs.getString("M_ORIGEN"));
 		
 		return objeto;
 	}

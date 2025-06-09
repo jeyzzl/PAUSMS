@@ -20,9 +20,10 @@ public class AdmRequisitoDao{
 	public boolean insertReg(AdmRequisito req ){
 		boolean ok = false;			
 		try{
-			String comando = "INSERT INTO SALOMON.ADM_REQUISITO (CARRERA_ID, DOCUMENTO_ID, MODALIDADES, AUTORIZAR, REQUERIDO)"
-					+ " VALUES( ?, TO_NUMBER(?,'99'),?,?,? )";
-			Object[] parametros = new Object[] { req.getCarreraId(), req.getDocumentoId(), req.getModalidades(), req.getAutorizar(), req.getRequerido()};
+			String comando = "INSERT INTO SALOMON.ADM_REQUISITO (CARRERA_ID, DOCUMENTO_ID, MODALIDADES, AUTORIZAR, REQUERIDO, NIVELES, TIPOS, NACIONALIDADES, ESTADOS_CIVILES)"
+					+ " VALUES( ?, TO_NUMBER(?,'99'),?,?,?,?,?,?,?)";
+			Object[] parametros = new Object[] { 	req.getCarreraId(), req.getDocumentoId(), req.getModalidades(), req.getAutorizar(), req.getRequerido(),
+													req.getNiveles(), req.getTipos(), req.getNacionalidades(), req.getEstadosCiviles()};
 			if (enocJdbc.update(comando,parametros)==1){
 				ok = true;
 			}			
@@ -37,10 +38,10 @@ public class AdmRequisitoDao{
 		boolean ok = false;
 		
 		try{
-			String comando = "UPDATE SALOMON.ADM_REQUISITO SET MODALIDADES = ?, AUTORIZAR = ?, REQUERIDO = ?"
+			String comando = "UPDATE SALOMON.ADM_REQUISITO SET MODALIDADES = ?, AUTORIZAR = ?, REQUERIDO = ?, NIVELES = ?, TIPOS = ?, NACIONALIDADES = ?, ESTADOS_CIVILES = ?"
 					+ " WHERE CARRERA_ID = ?"
 					+ " AND DOCUMENTO_ID = TO_NUMBER(?,'99')";
-			Object[] parametros = new Object[] { req.getModalidades(), req.getAutorizar(), req.getRequerido(), req.getCarreraId(), req.getDocumentoId()};
+			Object[] parametros = new Object[] { req.getModalidades(), req.getAutorizar(), req.getRequerido(), req.getNiveles(), req.getTipos(), req.getNacionalidades(), req.getEstadosCiviles(), req.getCarreraId(), req.getDocumentoId()};
 			if (enocJdbc.update(comando,parametros)==1){
 					ok = true;
 			}			
@@ -71,7 +72,7 @@ public class AdmRequisitoDao{
 		
 		AdmRequisito requisito = new AdmRequisito();		
 		try{
-			String comando = "SELECT CARRERA_ID, DOCUMENTO_ID, MODALIDADES, AUTORIZAR, REQUERIDO"
+			String comando = "SELECT CARRERA_ID, DOCUMENTO_ID, MODALIDADES, AUTORIZAR, REQUERIDO, NIVELES, TIPOS, NACIONALIDADES, ESTADOS_CIVILES"
 				+ " FROM SALOMON.ADM_REQUISITO"
 				+ " WHERE CARRERA_ID = ?"
 				+ " AND DOCUMENTO_ID = TO_NUMBER(?, '99')";
@@ -135,7 +136,7 @@ public class AdmRequisitoDao{
 		String comando	= "";
 		
 		try{
-			comando = "SELECT CARRERA_ID, DOCUMENTO_ID, MODALIDADES, AUTORIZAR, REQUERIDO FROM SALOMON.ADM_REQUISITO "+ orden;
+			comando = "SELECT CARRERA_ID, DOCUMENTO_ID, MODALIDADES, AUTORIZAR, REQUERIDO, NIVELES, TIPOS, NACIONALIDADES, ESTADOS_CIVILES FROM SALOMON.ADM_REQUISITO "+ orden;
 			lista = enocJdbc.query(comando, new AdmRequisitoMapper());			
 		}catch(Exception ex){
 			System.out.println("Error - aca.admision.spring.AdmRequisitoDao|getListAll|:"+ex);
@@ -148,7 +149,7 @@ public class AdmRequisitoDao{
 		
 		List<AdmRequisito> lista	= new ArrayList<AdmRequisito>();	
 		try{
-			String comando = "SELECT CARRERA_ID, DOCUMENTO_ID, MODALIDADES, AUTORIZAR, REQUERIDO FROM SALOMON.ADM_REQUISITO WHERE CARRERA_ID = ? " + orden;
+			String comando = "SELECT CARRERA_ID, DOCUMENTO_ID, MODALIDADES, AUTORIZAR, REQUERIDO, NIVELES, TIPOS, NACIONALIDADES, ESTADOS_CIVILES FROM SALOMON.ADM_REQUISITO WHERE CARRERA_ID = ? " + orden;
 			Object[] parametros = new Object[] {carreraId};
 			lista = enocJdbc.query(comando, new AdmRequisitoMapper(), parametros);
 		}catch(Exception ex){
@@ -163,7 +164,7 @@ public class AdmRequisitoDao{
 		HashMap<String,AdmRequisito> mapa 	= new HashMap<String, AdmRequisito>();
 		List<AdmRequisito> lista			= new ArrayList<AdmRequisito>();
 		try{
-			String comando = "SELECT CARRERA_ID, DOCUMENTO_ID, MODALIDADES, AUTORIZAR, REQUERIDO FROM SALOMON.ADM_REQUISITO WHERE CARRERA_ID = ?";
+			String comando = "SELECT CARRERA_ID, DOCUMENTO_ID, MODALIDADES, AUTORIZAR, REQUERIDO, NIVELES, TIPOS, NACIONALIDADES, ESTADOS_CIVILES FROM SALOMON.ADM_REQUISITO WHERE CARRERA_ID = ?";
 			Object[] parametros = new Object[] {carrera};
 			lista = enocJdbc.query(comando, new AdmRequisitoMapper(), parametros);
 			for (AdmRequisito requisito : lista) {

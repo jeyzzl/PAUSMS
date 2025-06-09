@@ -30,6 +30,14 @@ public class AlumUbicacion{
 	private String vacuna;
 	private String descripcionVacuna;
 	private String recogidaId;
+	private String pPais;
+	private String pEstado;
+	private String pCiudad;
+	private String pOrigen;
+	private String mPais;
+	private String mEstado;
+	private String mCiudad;
+	private String mOrigen;
 	
 	public AlumUbicacion(){
 		codigoPersonal		= "";
@@ -38,7 +46,7 @@ public class AlumUbicacion{
 		pNacionalidad		= "";
 		mNombre				= "-";
 		mReligion			= "1";
-		mNacionalidad		= "147";
+		mNacionalidad		= "";
 		tNombre 			= "";
 		tDireccion			= "";
 		tColonia			= "";
@@ -46,7 +54,7 @@ public class AlumUbicacion{
 		tApartado			= "";
 		tTelefono			= "";
 		tEmail				= "";
-		tPais				= "147";
+		tPais				= "";
 		tEstado				= "";
 		tCiudad				= "";
 		tCelular			= "";
@@ -57,8 +65,15 @@ public class AlumUbicacion{
 		fecha				= "";
 		vacuna				= "";
 		descripcionVacuna	= "";
-		recogidaId			= "";
-		
+		recogidaId			= "";	
+		pPais				= "";
+		pEstado				= "";
+		pCiudad				= "";
+		pOrigen				= "";
+		mPais				= "";
+		mEstado				= "";
+		mCiudad				= "";
+		mOrigen				= "";
 	}
 
 	public String getCodigoPersonal() {
@@ -267,6 +282,62 @@ public class AlumUbicacion{
 
 	public void setRecogidaId(String recogidaId) {
 		this.recogidaId = recogidaId;
+	}
+
+	public String getpPais() {
+		return pPais;
+	}
+	public void setpPais(String pPais) {
+		this.pPais = pPais;
+	}
+
+	public String getpEstado() {
+		return pEstado;
+	}
+	public void setpEstado(String pEstado) {
+		this.pEstado = pEstado;
+	}
+
+	public String getpCiudad() {
+		return pCiudad;
+	}
+	public void setpCiudad(String pCiudad) {
+		this.pCiudad = pCiudad;
+	}
+
+	public String getpOrigen() {
+		return pOrigen;
+	}
+	public void setpOrigen(String pOrigen) {
+		this.pOrigen = pOrigen;
+	}
+
+	public String getmPais() {
+		return mPais;
+	}
+	public void setmPais(String mPais) {
+		this.mPais = mPais;
+	}
+
+	public String getmEstado() {
+		return mEstado;
+	}
+	public void setmEstado(String mEstado) {
+		this.mEstado = mEstado;
+	}
+
+	public String getmCiudad() {
+		return mCiudad;
+	}
+	public void setmCiudad(String mCiudad) {
+		this.mCiudad = mCiudad;
+	}
+
+	public String getmOrigen() {
+		return mOrigen;
+	}
+	public void setmOrigen(String mOrigen) {
+		this.mOrigen = mOrigen;
 	}
 
 }

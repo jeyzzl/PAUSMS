@@ -204,6 +204,21 @@ public class CatPaisDao{
 		
 		return lista;
 	}
+
+	public List<CatPais> getListAllWithPriorityCountry(String priorityCountry) {
+		List<CatPais> lista = new ArrayList<CatPais>();
+		
+		try {
+			String comando = "SELECT PAIS_ID, NOMBRE_PAIS, NACIONALIDAD, INTERAMERICA, DIVISION_ID, SEMAFORO " +
+							"FROM ENOC.CAT_PAIS " +
+							"ORDER BY CASE WHEN PAIS_ID = ? THEN 0 ELSE 1 END, NOMBRE_PAIS";
+			lista = enocJdbc.query(comando, new CatPaisMapper(), priorityCountry);
+		} catch(Exception ex) {
+			System.out.println("Error - aca.catalogo.spring.CatPaisDao|getListAllWithPriorityCountry|:"+ex);
+		}
+		
+		return lista;
+	}
 	
 	public List<CatPais> listExtranjerosEnCarga(String cargaId, String orden ) {
 		

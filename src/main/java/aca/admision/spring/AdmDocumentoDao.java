@@ -145,7 +145,7 @@ public class AdmDocumentoDao {
 	public List<AdmDocumento> getAll(String orden) {
 		List<AdmDocumento> lista	= new ArrayList<AdmDocumento>();		
 		try{
-			String comando = "SELECT DOCUMENTO_ID, DOCUMENTO_NOMBRE, TIPO, COMENTARIO, ORIGINAL, ORDEN, FORMATO_ID, CORTO FROM SALOMON.ADM_DOCUMENTO " + orden;			
+			String comando = "SELECT DOCUMENTO_ID, DOCUMENTO_NOMBRE, TIPO, COMENTARIO, ORIGINAL, ORDEN, FORMATO_ID, CORTO FROM SALOMON.ADM_DOCUMENTO WHERE (TIPO = '1' OR TIPO = '2')" + orden;			
 			lista = enocJdbc.query(comando, new AdmDocumentoMapper());			
 		}catch(Exception ex){
 			System.out.println("Error - aca.admision.spring.AdmDocumentoDao|getAll|:"+ex);

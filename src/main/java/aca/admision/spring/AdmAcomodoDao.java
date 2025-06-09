@@ -21,11 +21,11 @@ public class AdmAcomodoDao {
 		
 		try{
 			String comando = "INSERT INTO SALOMON.ADM_ACOMODO"+ 
-				"(ACOMODO_ID, ACOMODO_NOMBRE, ACOMODO_TIPO) "+
-				"VALUES(?, ?, ?)";
+				"(ACOMODO_ID, ACOMODO_NOMBRE, ACOMODO_TIPO, ACOMODO_GENERO) "+
+				"VALUES(?, ?, ?, ?)";
 			
 			Object[] parametros = new Object[] {
-				admAcomodo.getAcomodoId(), admAcomodo.getAcomodoId(), admAcomodo.getAcomodoTipo()
+				admAcomodo.getAcomodoId(), admAcomodo.getAcomodoId(), admAcomodo.getAcomodoTipo(), admAcomodo.getAcomodoGenero()
  		 	};
 			if (enocJdbc.update(comando,parametros)==1){
 				ok = true;
@@ -61,7 +61,7 @@ public class AdmAcomodoDao {
 		AdmAcomodo objeto = new AdmAcomodo();
 		
 		try {
-			String comando = "SELECT ACOMODO_ID, ACOMODO_NOMBRE, ACOMODO_TIPO"+
+			String comando = "SELECT ACOMODO_ID, ACOMODO_NOMBRE, ACOMODO_TIPO, ACOMODO_GENERO"+
 					" FROM SALOMON.ADM_ACOMODO" + 
 					" WHERE ACOMODO_ID = ?";
 			
@@ -117,7 +117,7 @@ public class AdmAcomodoDao {
 		
 		try{
 			String comando = "SELECT "+
-					" ACOMODO_ID, ACOMODO_NOMBRE, ACOMODO_TIPO"+
+					" ACOMODO_ID, ACOMODO_NOMBRE, ACOMODO_TIPO, ACOMODO_GENERO"+
 					" FROM SALOMON.ADM_ACOMODO"+
 					" WHERE ACOMODO_TIPO = ?"; 			
 			lista = enocJdbc.query(comando,new AdmAcomodoMapper(), tipo);
@@ -138,7 +138,7 @@ public class AdmAcomodoDao {
 		String comando	= "";
 		
 		try{
-			comando = " SELECT ACOMODO_ID, ACOMODO_NOMBRE, ACOMODO_TIPO"
+			comando = " SELECT ACOMODO_ID, ACOMODO_NOMBRE, ACOMODO_TIPO, ACOMODO_GENERO"
 					+ " FROM SALOMON.ADM_ACOMODO" 
 					+ " WHERE ACOMODO_TIPO = ?"; 
 			

@@ -13,6 +13,7 @@ public class AdmAcomodoMapper implements RowMapper<AdmAcomodo> {
 		objeto.setAcomodoId(rs.getString("ACOMODO_ID"));
 		objeto.setAcomodoNombre(rs.getString("ACOMODO_NOMBRE"));
 		objeto.setAcomodoTipo(rs.getString("ACOMODO_TIPO"));
+		objeto.setAcomodoGenero(rs.getString("ACOMODO_GENERO"));
 
 		return objeto;
 	}

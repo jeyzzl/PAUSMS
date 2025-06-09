@@ -594,6 +594,7 @@ public class ContAdmisionDatos {
 		String cotejado					= "N";
 		AlumUbicacion alumUbicacion 	= new AlumUbicacion();
 		LogAlumno logAlumno				= new LogAlumno();
+		Parametros parametros			= parametrosDao.mapeaRegId("1");
 
 		boolean existeUbicacion			= false;
 		HttpSession sesion		= request.getSession();
@@ -610,9 +611,13 @@ public class ContAdmisionDatos {
         }
 
         List<CatReligion> lisReligiones 		= catReligionDao.getListAll(" ORDER BY 2");
-        List<CatPais> lisPaises 				= catPaisDao.getListAll(" ORDER BY 2");
+        List<CatPais> lisPaises 				= catPaisDao.getListAllWithPriorityCountry(parametros.getPaisId());
         List<CatEstado> lisEstados 				= catEstadoDao.getLista(alumUbicacion.gettPais() ,"ORDER BY 1,3");
         List<CatCiudad> lisCiudades 			= catCiudadDao.getLista(alumUbicacion.gettPais(), alumUbicacion.gettEstado(), "ORDER BY 4");
+        List<CatEstado> lisPEstados 			= catEstadoDao.getLista(alumUbicacion.getpPais() ,"ORDER BY 1,3");
+        List<CatCiudad> lisPCiudades 			= catCiudadDao.getLista(alumUbicacion.getpPais(), alumUbicacion.getpEstado(), "ORDER BY 4");
+        List<CatEstado> lisMEstados 			= catEstadoDao.getLista(alumUbicacion.getmPais() ,"ORDER BY 1,3");
+        List<CatCiudad> lisMCiudades 			= catCiudadDao.getLista(alumUbicacion.getmPais(), alumUbicacion.getmEstado(), "ORDER BY 4");
 		List<CatRecogida> lisRecogidas 			= catRecogidaDao.getListAll(" ORDER BY 2");
 
         String maxUpdate = logAlumnoDao.maximoId("ALUM_UBICACION", codigoAlumno);
@@ -638,6 +643,10 @@ public class ContAdmisionDatos {
 		modelo.addAttribute("lisPaises", lisPaises);
 		modelo.addAttribute("lisEstados", lisEstados);
 		modelo.addAttribute("lisCiudades", lisCiudades);
+		modelo.addAttribute("lisPEstados", lisPEstados);
+		modelo.addAttribute("lisPCiudades", lisPCiudades);
+		modelo.addAttribute("lisMEstados", lisMEstados);
+		modelo.addAttribute("lisMCiudades", lisMCiudades);
 		modelo.addAttribute("lisRecogidas", lisRecogidas);
 
 		return "admision/datos/accion_u";
@@ -678,6 +687,14 @@ public class ContAdmisionDatos {
         	alumUbicacion.settEstado(request.getParameter("TEstado"));
         	alumUbicacion.settCiudad(request.getParameter("TCiudad"));
 			alumUbicacion.setRecogidaId(request.getParameter("RecogidaId"));
+			alumUbicacion.setpPais(request.getParameter("PPais"));
+			alumUbicacion.setpEstado(request.getParameter("PEstado"));
+			alumUbicacion.setpCiudad(request.getParameter("PCiudad"));
+			alumUbicacion.setpOrigen(request.getParameter("POrigen"));
+			alumUbicacion.setmPais(request.getParameter("MPais"));
+			alumUbicacion.setmEstado(request.getParameter("MEstado"));
+			alumUbicacion.setmCiudad(request.getParameter("MCiudad"));
+			alumUbicacion.setmOrigen(request.getParameter("MOrigen"));
 
         	if (!alumUbicacionDao.existeReg(codigoAlumno)) {
         		// insert
@@ -742,7 +759,7 @@ public class ContAdmisionDatos {
 	public String admisionDatosAlumno(HttpServletRequest request, Model modelo){
 
 		String codigoAlumno 			= "0";
-		String ingreso					= "No ingresó";
+		String ingreso					= "Not registered";
 		String nacionalidadNombre		= "-";
 		String paisNombre				= "-";
 		String estadoNombre				= "-";
@@ -809,15 +826,17 @@ public class ContAdmisionDatos {
     		//usuarioActualizo = usuariosDao.getNombreUsuarioCorto(logAlumno.getUsuario());
     	}
 
+		Parametros parametros = parametrosDao.mapeaRegId("1");
+
         List<CatReligion> lisReligiones 		= catReligionDao.getListAll(" ORDER BY 2");
-        List<CatPais> lisPaises 				= catPaisDao.getListAll(" ORDER BY 2");
-        List<CatEstado> lisEstados 				= catEstadoDao.getLista(alumPersonal.getPaisId(),"ORDER BY 1,3");
-        List<CatCiudad> lisCiudades 			= catCiudadDao.getLista(alumPersonal.getPaisId(), alumPersonal.getEstadoId(), "ORDER BY 4");
+        List<CatPais> lisPaises 				= catPaisDao.getListAllWithPriorityCountry(parametros.getPaisId());
+        List<CatEstado> lisEstados 				= catEstadoDao.getLista(parametros.getPaisId(),"ORDER BY 2,3");
+        List<CatCiudad> lisCiudades 			= catCiudadDao.getLista(parametros.getPaisId(), "1", "ORDER BY 3");
         List<CatCultural> lisGrupos				= catCulturalDao.getListAll("");
         List<CatRegion> lisRegiones				= catRegionDao.getLista(alumPersonal.getCulturalId(), "");
-		List<CatPais> lisResPaises 				= catPaisDao.getListAll("ORDER BY 2");
-		List<CatEstado> lisResEstados 			= catEstadoDao.getLista(alumPersonal.getResPaisId(), "ORDER BY 1,3");
-		List<CatCiudad> lisResCiudades 			= catCiudadDao.getLista(alumPersonal.getResPaisId(), alumPersonal.getResEstadoId(), "ORDER BY 4");
+		List<CatPais> lisResPaises 				= catPaisDao.getListAllWithPriorityCountry(parametros.getPaisId());
+		List<CatEstado> lisResEstados 			= catEstadoDao.getLista(parametros.getPaisId(), "ORDER BY 2,3");
+		List<CatCiudad> lisResCiudades 			= catCiudadDao.getLista(parametros.getPaisId(), "1", "ORDER BY 3");
 
 		modelo.addAttribute("alumPersonal", alumPersonal);
 		modelo.addAttribute("logAlumno", logAlumno);
@@ -844,6 +863,7 @@ public class ContAdmisionDatos {
 		modelo.addAttribute("lisResPaises", lisResPaises);
 		modelo.addAttribute("lisResEstados", lisResEstados);
 		modelo.addAttribute("lisResCiudades", lisResCiudades);
+		modelo.addAttribute("parametros", parametros);
 
 		return "admision/datos/alumno";
 	}

@@ -22,13 +22,14 @@ public class AdmUsuarioDao{
 		try{
 			String comando = "INSERT INTO SALOMON.ADM_USUARIO"+ 
 				"(USUARIO_ID, NOMBRE, APELLIDO_PATERNO, APELLIDO_MATERNO, FECHA_NAC, EMAIL, CUENTA, " +
-				" CLAVE, MATRICULA, TELEFONO, PAIS_ID, ESTADO_ID, CIUDAD_ID, GENERO, ESTADOCIVIL, RELIGION_ID, ESTADO, CODIGO, NACIONALIDAD) "+
-				"VALUES( TO_NUMBER(?,'99999'), ?, ?, ?, TO_DATE(?, 'DD/MM/YYYY'), ?, ?, ?, ?, ?, TO_NUMBER(?,'99'),TO_NUMBER(?,'99'),TO_NUMBER(?,'99'), " +
-				"?, ?, TO_NUMBER(?,'99'), ?, ?, ? )";			
+				" CLAVE, MATRICULA, TELEFONO, PAIS_ID, ESTADO_ID, CIUDAD_ID, GENERO, ESTADOCIVIL, RELIGION_ID, ESTADO, CODIGO, NACIONALIDAD, EMPLEADO, INSTITUCION_ID) "+
+				"VALUES( TO_NUMBER(?,'99999'), ?, ?, ?, TO_DATE(?, 'DD/MM/YYYY'), ?, ?, ?, ?, ?, TO_NUMBER(?,'999'),TO_NUMBER(?,'999'),TO_NUMBER(?,'999'), " +
+				"?, ?, TO_NUMBER(?,'99'), ?, ?, TO_NUMBER(?, '999'), ?, TO_NUMBER(?,'999'))";			
 			Object[] parametros = new Object[] {
 				admUsuario.getUsuarioId(),admUsuario.getNombre(),admUsuario.getApellidoPaterno(),admUsuario.getApellidoMaterno(),admUsuario.getFechaNac(),admUsuario.getEmail(),
 				admUsuario.getCuenta(),admUsuario.getClave(),admUsuario.getMatricula(),admUsuario.getTelefono(), admUsuario.getPaisId(),admUsuario.getEstadoId(),admUsuario.getCiudadId(),
-				admUsuario.getGenero(),admUsuario.getEstadoCivil(),admUsuario.getReligionId(), admUsuario.getEstado(), admUsuario.getCodigo(), admUsuario.getNacionalidad()
+				admUsuario.getGenero(),admUsuario.getEstadoCivil(),admUsuario.getReligionId(), admUsuario.getEstado(), admUsuario.getCodigo(), admUsuario.getNacionalidad(), admUsuario.getEmpleado(),
+				admUsuario.getInstitucionId()
  		 	};
 			if (enocJdbc.update(comando,parametros)==1){
 				ok = true;
@@ -45,30 +46,33 @@ public class AdmUsuarioDao{
 
 		try{
 			String comando = "UPDATE SALOMON.ADM_USUARIO SET"
-					+ " NOMBRE = ?, "
-					+ " APELLIDO_PATERNO = ?, "
-					+ " APELLIDO_MATERNO = ?, "
-					+ " FECHA_NAC = TO_DATE(?, 'DD/MM/YYYY'), "
-					+ " EMAIL = ?, "
-					+ " CUENTA = ?, "
-					+ " CLAVE = ?, "
-					+ " MATRICULA = ?, "
-					+ " TELEFONO = ?, "
-					+ " PAIS_ID = TO_NUMBER(?, '99') , "
-					+ " ESTADO_ID = TO_NUMBER(?, '99') , "
-					+ " CIUDAD_ID = TO_NUMBER(?, '99') , "
-					+ " GENERO = ?, "
-					+ " ESTADOCIVIL = ?, "
-					+ " RELIGION_ID = TO_NUMBER(?, '99') , "
-					+ " ESTADO = ? , "
-					+ " CODIGO = ? , "
-					+ " NACIONALIDAD = ? , "
+					+ " NOMBRE = ?,"
+					+ " APELLIDO_PATERNO = ?,"
+					+ " APELLIDO_MATERNO = ?,"
+					+ " FECHA_NAC = TO_DATE(?, 'DD/MM/YYYY'),"
+					+ " EMAIL = ?,"
+					+ " CUENTA = ?,"
+					+ " CLAVE = ?,"
+					+ " MATRICULA = ?,"
+					+ " TELEFONO = ?,"
+					+ " PAIS_ID = TO_NUMBER(?, '999') ,"
+					+ " ESTADO_ID = TO_NUMBER(?, '999') ,"
+					+ " CIUDAD_ID = TO_NUMBER(?, '999') ,"
+					+ " GENERO = ?,"
+					+ " ESTADOCIVIL = ?,"
+					+ " RELIGION_ID = TO_NUMBER(?, '99'),"
+					+ " ESTADO = ? ,"
+					+ " CODIGO = ? ,"
+					+ " NACIONALIDAD = TO_NUMBER(?, '999'),"
+					+ " EMPLEADO = ?,"
+					+ " INSTITUCION_ID = TO_NUMBER(?, '999')"
 					+ " WHERE USUARIO_ID = TO_NUMBER(?,'99999')";
 			
 			Object[] parametros = new Object[] {
 					admUsuario.getNombre(),admUsuario.getApellidoPaterno(),admUsuario.getApellidoMaterno(),admUsuario.getFechaNac(),admUsuario.getEmail(),
 					admUsuario.getCuenta(),admUsuario.getClave(),admUsuario.getMatricula(),admUsuario.getTelefono(),admUsuario.getPaisId(),admUsuario.getEstadoId(),
 					admUsuario.getCiudadId(),admUsuario.getGenero(),admUsuario.getEstadoCivil(),admUsuario.getReligionId(),admUsuario.getEstado(),admUsuario.getCodigo(),admUsuario.getNacionalidad(),
+					admUsuario.getEmpleado(), admUsuario.getInstitucionId(),
 					admUsuario.getUsuarioId()
  		 	};
 			if (enocJdbc.update(comando,parametros)==1){
@@ -144,7 +148,7 @@ public class AdmUsuarioDao{
 		try {
 			String comando = "SELECT USUARIO_ID, NOMBRE, APELLIDO_PATERNO, APELLIDO_MATERNO, TO_CHAR(FECHA_NAC,'DD/MM/YYYY') AS FECHA_NAC, EMAIL, CUENTA,"
 					+ " CLAVE, MATRICULA, TELEFONO, PAIS_ID, ESTADO_ID, CIUDAD_ID, GENERO, ESTADOCIVIL, RELIGION_ID,"
-					+ " TO_CHAR(FECHA,'YYYY/MM/DD HH24:MI:SS') AS FECHA, ESTADO, CODIGO, NACIONALIDAD"
+					+ " TO_CHAR(FECHA,'YYYY/MM/DD HH24:MI:SS') AS FECHA, ESTADO, CODIGO, NACIONALIDAD, EMPLEADO, INSTITUCION_ID"
 					+ " FROM SALOMON.ADM_USUARIO"
 					+ " WHERE USUARIO_ID = TO_NUMBER(?,'99999')";			
 			Object[] parametros = new Object[] {UsuarioId};
@@ -272,7 +276,7 @@ public class AdmUsuarioDao{
 		try{
 			String comando = "SELECT USUARIO_ID, NOMBRE, APELLIDO_PATERNO, APELLIDO_MATERNO, FECHA_NAC, EMAIL, CUENTA,"
 				+ " CLAVE, MATRICULA, TELEFONO, PAIS_ID, ESTADO_ID, CIUDAD_ID, GENERO, ESTADOCIVIL, RELIGION_ID,"
-				+ " TO_CHAR(FECHA,'YYYY/MM/DD HH24:MI:SS') AS FECHA, ESTADO, CODIGO, NACIONALIDAD "
+				+ " TO_CHAR(FECHA,'YYYY/MM/DD HH24:MI:SS') AS FECHA, ESTADO, CODIGO, NACIONALIDAD, EMPLEADO, INSTITUCION_ID"
 				+ " FROM SALOMON.ADM_USUARIO "+ orden;			
 			lista = enocJdbc.query(comando, new AdmUsuarioMapper());			
 		}catch(Exception ex){
@@ -286,7 +290,7 @@ public class AdmUsuarioDao{
 		try{
 			String comando =  "SELECT USUARIO_ID, NOMBRE, APELLIDO_PATERNO, APELLIDO_MATERNO, FECHA_NAC, EMAIL, CUENTA,"
 				+ " CLAVE, MATRICULA, TELEFONO, PAIS_ID, ESTADO_ID, CIUDAD_ID, GENERO, ESTADOCIVIL, RELIGION_ID,"
-				+ " TO_CHAR(FECHA,'YYYY/MM/DD HH24:MI:SS') AS FECHA, ESTADO, CODIGO, NACIONALIDAD"		
+				+ " TO_CHAR(FECHA,'YYYY/MM/DD HH24:MI:SS') AS FECHA, ESTADO, CODIGO, NACIONALIDAD, EMPLEADO, INSTITUCION_ID"		
 				+ " FROM SALOMON.ADM_USUARIO "
 				+ " WHERE USUARIO_ID NOT IN (SELECT USUARIO_ID FROM SALOMON.ADM_SOLICITUD)" + orden;
 			lista = enocJdbc.query(comando, new AdmUsuarioMapper());
@@ -301,7 +305,7 @@ public class AdmUsuarioDao{
 		try{
 			String comando =  "SELECT USUARIO_ID, NOMBRE, APELLIDO_PATERNO, APELLIDO_MATERNO, FECHA_NAC, EMAIL, CUENTA,"
 				+ " CLAVE, MATRICULA, TELEFONO, PAIS_ID, ESTADO_ID, CIUDAD_ID, GENERO, ESTADOCIVIL, RELIGION_ID,"
-				+ " TO_CHAR(FECHA,'YYYY/MM/DD HH24:MI:SS') AS FECHA, ESTADO, CODIGO, NACIONALIDAD"		
+				+ " TO_CHAR(FECHA,'YYYY/MM/DD HH24:MI:SS') AS FECHA, ESTADO, CODIGO, NACIONALIDAD, EMPLEADO, INSTITUCION_ID"		
 				+ " FROM SALOMON.ADM_USUARIO "+ condicion + orden;
 			lista = enocJdbc.query(comando, new AdmUsuarioMapper());
 		}catch(Exception ex){
@@ -316,7 +320,7 @@ public class AdmUsuarioDao{
 		try {
 			String comando = "SELECT USUARIO_ID, NOMBRE, APELLIDO_PATERNO, APELLIDO_MATERNO, FECHA_NAC, EMAIL, CUENTA,"
 				+ " CLAVE, MATRICULA, TELEFONO, PAIS_ID, ESTADO_ID, CIUDAD_ID, GENERO, ESTADOCIVIL, RELIGION_ID,"
-				+ " TO_CHAR(FECHA,'YYYY/MM/DD HH24:MI:SS') AS FECHA, ESTADO, CODIGO, NACIONALIDAD"
+				+ " TO_CHAR(FECHA,'YYYY/MM/DD HH24:MI:SS') AS FECHA, ESTADO, CODIGO, NACIONALIDAD, EMPLEADO, INSTITUCION_ID"
 				+ " FROM SALOMON.ADM_USUARIO "
 				+ " WHERE USUARIO_ID IN ("
 				+ "	  SELECT USUARIO_ID FROM SALOMON.ADM_SOLICITUD WHERE FOLIO IN(SELECT FOLIO FROM SALOMON.ADM_PASOS WHERE PASOS = '2' AND ESTADO = '0')"
@@ -337,7 +341,7 @@ public class AdmUsuarioDao{
 		try {
 			String comando = "SELECT USUARIO_ID, NOMBRE, APELLIDO_PATERNO, APELLIDO_MATERNO, FECHA_NAC, EMAIL, CUENTA,"
 				+ " CLAVE, MATRICULA, TELEFONO, PAIS_ID, ESTADO_ID, CIUDAD_ID, GENERO, ESTADOCIVIL, RELIGION_ID,"
-				+ " TO_CHAR(FECHA,'YYYY/MM/DD HH24:MI:SS') AS FECHA, ESTADO, CODIGO, NACIONALIDAD"
+				+ " TO_CHAR(FECHA,'YYYY/MM/DD HH24:MI:SS') AS FECHA, ESTADO, CODIGO, NACIONALIDAD, EMPLEADO, INSTITUCION_ID"
 				+ " FROM SALOMON.ADM_USUARIO"
 				+ " WHERE USUARIO_ID IN (SELECT USUARIO_ID FROM SALOMON.ADM_SOLICITUD WHERE FOLIO IN (SELECT FOLIO FROM SALOMON.ADM_RESERVADA WHERE EVENTO_ID = TO_NUMBER(?,'99999')))";
 			Object[] parametros = new Object[] {eventoId};
@@ -357,7 +361,7 @@ public class AdmUsuarioDao{
 		try {
 			String comando = "SELECT USUARIO_ID, NOMBRE, APELLIDO_PATERNO, APELLIDO_MATERNO, FECHA_NAC, EMAIL, CUENTA,"
 					+ " CLAVE, MATRICULA, TELEFONO, PAIS_ID, ESTADO_ID, CIUDAD_ID, GENERO, ESTADOCIVIL, RELIGION_ID,"
-					+ " TO_CHAR(FECHA,'YYYY/MM/DD HH24:MI:SS') AS FECHA, ESTADO, CODIGO, NACIONALIDAD"
+					+ " TO_CHAR(FECHA,'YYYY/MM/DD HH24:MI:SS') AS FECHA, ESTADO, CODIGO, NACIONALIDAD, EMPLEADO, INSTITUCION_ID"
 					+ " FROM SALOMON.ADM_USUARIO"
 					+ " WHERE USUARIO_ID IN (SELECT USUARIO_ID FROM SALOMON.ADM_SOLICITUD WHERE FOLIO IN (SELECT FOLIO FROM SALOMON.ADM_PRUEBA_ALUMNO))";			
 			lista = enocJdbc.query(comando, new AdmUsuarioMapper());
@@ -376,7 +380,7 @@ public class AdmUsuarioDao{
 		try {
 			String comando = "SELECT USUARIO_ID, NOMBRE, APELLIDO_PATERNO, APELLIDO_MATERNO, FECHA_NAC, EMAIL, CUENTA,"
 					+ " CLAVE, MATRICULA, TELEFONO, PAIS_ID, ESTADO_ID, CIUDAD_ID, GENERO, ESTADOCIVIL, RELIGION_ID,"
-					+ " TO_CHAR(FECHA,'YYYY/MM/DD HH24:MI:SS') AS FECHA, ESTADO, CODIGO, NACIONALIDAD"
+					+ " TO_CHAR(FECHA,'YYYY/MM/DD HH24:MI:SS') AS FECHA, ESTADO, CODIGO, NACIONALIDAD, EMPLEADO, INSTITUCION_ID"
 					+ " FROM SALOMON.ADM_USUARIO"
 					+ " WHERE USUARIO_ID IN (SELECT USUARIO_ID FROM SALOMON.ADM_SOLICITUD WHERE ESTADO = ?)";
 			lista = enocJdbc.query(comando, new AdmUsuarioMapper(), estado);

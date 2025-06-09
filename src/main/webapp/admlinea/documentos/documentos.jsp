@@ -29,7 +29,7 @@
 <div class="container-fluid">
 	<h2><spring:message code='aca.ListadoDeDocumentosDeIngreso'/></h2>
 	<div class="alert alert-info">
-		<a class="btn btn-primary" href="editar"><spring:message code='aca.Añadir'/></a>	
+		<a class="btn btn-primary" href="editar"><spring:message code='aca.Aï¿½adir'/></a>	
 	</div>
 	<table  class="table table-bordered table-striped">
 	<tr> 
@@ -58,8 +58,7 @@
 	<tr class="tr2"> 
 		<td style="text-align:center">
 			<a href="editar?DocumentoId=<%=docto.getDocumentoId()%>"><i class="fas fa-pencil-alt"></i></a>
-     		<%if(regPorDocumento.equals("0")){ %>
-     				&nbsp;&nbsp;
+     		<% if(regPorDocumento.equals("0")){ %>
 				<a href="javascript:Borrar('<%=docto.getDocumentoId()%>')" class="fas fa-trash-alt"></a>
      		<%	} %>
 		</td>

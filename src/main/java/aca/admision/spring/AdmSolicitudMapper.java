@@ -34,6 +34,8 @@ public class AdmSolicitudMapper implements RowMapper<AdmSolicitud> {
 		objeto.setFechaIngreso(rs.getString("FECHA_INGRESO"));
 		objeto.setAgente(rs.getString("AGENTE"));
 		objeto.setAsesorSec(rs.getString("ASESOR_SEC"));
+		objeto.setRedSocial(rs.getString("RED_SOCIAL"));
+		objeto.setFeligresia(rs.getString("FELIGRESIA"));
 		objeto.setTelefono(rs.getString("TELEFONO"));
 		objeto.setCarta(rs.getString("CARTA"));
 		objeto.setCodigo(rs.getString("CODIGO"));
@@ -46,6 +48,11 @@ public class AdmSolicitudMapper implements RowMapper<AdmSolicitud> {
 		objeto.setResEstadoId(rs.getString("RES_ESTADO_ID"));
 		objeto.setResCiudadId(rs.getString("RES_CIUDAD_ID"));
 		objeto.setAcomodoId(rs.getString("ACOMODO_ID"));
+		objeto.setTipo(rs.getString("TIPO"));
+		objeto.setNivelEstudio(rs.getString("NIVEL_ESTUDIO"));
+		objeto.setTipoAplicante(rs.getString("TIPO_APLICANTE"));
+		objeto.setPeriodoId(rs.getString("PERIODO_ID"));
+		objeto.setTipoAcomodo(rs.getString("TIPO_ACOMODO"));
 		
 		return objeto;
 	}

@@ -26,6 +26,8 @@ public class AdmSolicitud{
 	private String fechaIngreso;
 	private String agente;
 	private String asesorSec;
+	private String redSocial;
+	private String feligresia;
 	private String telefono;
 	private String carta;
 	private String codigo;
@@ -38,6 +40,11 @@ public class AdmSolicitud{
 	private String resEstadoId;
 	private String resCiudadId;
 	private String acomodoId;
+	private String tipo;
+	private String nivelEstudio;
+	private String tipoAplicante;
+	private String periodoId;
+	private String tipoAcomodo;
 	
 	public AdmSolicitud(){
 		folio 			= "0";
@@ -64,6 +71,8 @@ public class AdmSolicitud{
 		fechaIngreso	= "";
 		agente			= "";
 		asesorSec		= "-";
+		redSocial		= "";
+		feligresia		= "";
 		telefono		= "-";
 		carta			= "-";
 		codigo			= "0";
@@ -76,6 +85,11 @@ public class AdmSolicitud{
 		resEstadoId		= "1";
 		resCiudadId		= "1";
 		acomodoId		= "0";
+		tipo 			= "0";
+		nivelEstudio 	= "U";
+		tipoAplicante 	= "N";
+		periodoId		= "0";
+		tipoAcomodo		= "0";
 
 	}
 	
@@ -276,6 +290,22 @@ public class AdmSolicitud{
 	public void setAsesorSec(String asesorSec) {
 		this.asesorSec = asesorSec;
 	}
+	
+	public String getRedSocial() {
+		return redSocial;
+	}
+
+	public void setRedSocial(String redSocial) {
+		this.redSocial = redSocial;
+	}
+
+	public String getFeligresia() {
+		return feligresia;
+	}
+
+	public void setFeligresia(String feligresia) {
+		this.feligresia = feligresia;
+	}
 
 	public String getTelefono() {
 		return telefono;
@@ -346,7 +376,39 @@ public class AdmSolicitud{
 	public void setAcomodoId(String acomodoId) {
 		this.acomodoId = acomodoId;
 	}
+	
+	public String getTipo() {
+		return tipo;
+	}
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
 
-	
-	
+	public String getNivelEstudio() {
+		return nivelEstudio;
+	}
+	public void setNivelEstudio(String nivelEstudio) {
+		this.nivelEstudio = nivelEstudio;
+	}
+
+	public String getTipoAplicante() {
+		return tipoAplicante;
+	}
+	public void setTipoAplicante(String tipoAplicante) {
+		this.tipoAplicante = tipoAplicante;
+	}
+
+	public String getPeriodoId() {
+		return periodoId;
+	}
+	public void setPeriodoId(String periodoId) {
+		this.periodoId = periodoId;
+	}
+
+	public String getTipoAcomodo() {
+		return tipoAcomodo;
+	}
+	public void setTipoAcomodo(String tipoAcomodo) {
+		this.tipoAcomodo = tipoAcomodo;
+	}
 }

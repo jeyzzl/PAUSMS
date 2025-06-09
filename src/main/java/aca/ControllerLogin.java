@@ -482,10 +482,10 @@ public class ControllerLogin{
 		alumPersonal.setReligionId("1");
 		alumPersonal.setTelefono(alumno.getTelefono());
 		alumPersonal.setEmail(alumno.getCorreo());
-		alumPersonal.setPaisId("91");
+		alumPersonal.setPaisId(parametros.getPaisId());
 		alumPersonal.setEstadoId("");
 		alumPersonal.setCiudadId("0");
-		alumPersonal.setNacionalidad("91");
+		alumPersonal.setNacionalidad(parametros.getPaisId());
 		alumPersonal.setFCreado(aca.util.Fecha.getHoy());
 		alumPersonal.setUsAlta(codigoPersonal);
 		

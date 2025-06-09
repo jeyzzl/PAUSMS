@@ -16,7 +16,11 @@ public class AdmRequisitoMapper implements RowMapper<AdmRequisito>{
 		objeto.setModalidades(rs.getString("MODALIDADES"));
 		objeto.setAutorizar(rs.getString("AUTORIZAR"));
 		objeto.setRequerido(rs.getString("REQUERIDO"));
-		
+		objeto.setNiveles(rs.getString("NIVELES"));
+		objeto.setTipos(rs.getString("TIPOS"));
+		objeto.setNacionalidades(rs.getString("NACIONALIDADES"));
+		objeto.setEstadosCiviles(rs.getString("ESTADOS_CIVILES"));
+
 		return objeto;
 	}
 }

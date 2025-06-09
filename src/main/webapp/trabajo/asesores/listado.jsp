@@ -9,9 +9,9 @@
 <%@ include file= "../../idioma.jsp" %>
 
 <script type="text/javascript">
-	function Borrar(CodigoPersonal) {
+	function Borrar(CodigoPersonal, DeptId) {
 		if(confirm("<spring:message code="aca.JSEliminar"/> " ) == true) {
-			document.location.href = "borrar?CodigoPersonal="+CodigoPersonal;
+			document.location.href = "borrar?CodigoPersonal="+CodigoPersonal+"&DeptId="+DeptId;
 		} 
 	}
 
@@ -71,7 +71,7 @@
             <td><%=row%></td>
             <td>
                 <a href="editarAsesor?CodigoPersonal=<%=asesor.getCodigoPersonal()%>&DeptId=<%=asesor.getDeptId()%>"><i class="fas fa-edit"></i></a>
-                <a href="javascript:Borrar('<%=asesor.getCodigoPersonal()%>')"><i class="fas fa-trash-alt"></i></a>
+                <a href="javascript:Borrar('<%=asesor.getCodigoPersonal()%>','<%=asesor.getDeptId()%>')"><i class="fas fa-trash-alt"></i></a>
             </td>
             <td><%=asesor.getCodigoPersonal()%></td>
             <td><%=nombre%></td>

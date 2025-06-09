@@ -15,6 +15,7 @@
 	String carrera				= request.getParameter("Carrera")==null?"0":request.getParameter("Carrera");
 	String facultadNombre		= (String)request.getAttribute("facultadNombre");
 	String carreraNombre		= (String)request.getAttribute("carreraNombre");
+	String mensaje 				= request.getParameter("Mensaje")==null?"-":request.getParameter("Mensaje");
 
 	List<AdmDocumento> lisDocumentos 				= (List<AdmDocumento>) request.getAttribute("lisDocumentos");
 	HashMap<String,AdmRequisito> mapaRequisitos		= (HashMap<String,AdmRequisito>) request.getAttribute("mapaRequisitos");
@@ -25,14 +26,21 @@
 	<div class="alert alert-info">
 		<a href="carrera?facultad=<%=facultad %>" class="btn btn-primary"><spring:message code='aca.Regresar'/></a>&nbsp;&nbsp;
 		<strong><spring:message code='aca.SeleccioneUnDocumento'/>&nbsp;!</strong>
+<%	if(!mensaje.equals("-")){%>
+			<%=mensaje%>
+<%	}%>
 	</div>
 	<table id="table" class="table table-sm table-bordered"  >
    	<thead>
 	  	<tr>
-	  		<th><h3>#</h3></th>									    	
-	    	<th><h3><spring:message code="aca.Documento"/></h3></th>
-	    	<th><h3><spring:message code="aca.Modalidades"/></h3></th>
-	    	<th><h3><spring:message code="aca.Coordinador"/> Authorization</h3></th>
+	  		<th>#</th>									    	
+	    	<th><spring:message code="aca.Documento"/></th>
+	    	<th><spring:message code="aca.Modalidades"/></th>
+			<th>Study Levels</th>
+			<th>Application Types</th>
+			<th>Nationalities</th>
+			<th>Marital Status</th>
+	    	<th><spring:message code="aca.Coordinador"/> Authorization</th>
 	  	</tr>
 	</thead>
 	<tbody>
@@ -44,12 +52,20 @@
 		String etiqueta		= "<span class='bg'>"+row+"</span>"; 
 		String valor		= "NO";
 		String modalidades 	= "-";
+		String niveles 		= "-";
+		String tipos 		= "-";
+		String nacionalidades = "-";
+		String estadosCiviles = "-";
 		String requerido 	= "-";
 		String coordinador	= "-";
 		if (mapaRequisitos.containsKey(documento.getDocumentoId())){
-			modalidades = mapaRequisitos.get(documento.getDocumentoId()).getModalidades();
-			requerido 	= mapaRequisitos.get(documento.getDocumentoId()).getRequerido();
-			coordinador = mapaRequisitos.get(documento.getDocumentoId()).getAutorizar();
+			modalidades 	= mapaRequisitos.get(documento.getDocumentoId()).getModalidades();
+			niveles 		= mapaRequisitos.get(documento.getDocumentoId()).getNiveles();
+			tipos 			= mapaRequisitos.get(documento.getDocumentoId()).getTipos();
+			nacionalidades 	= mapaRequisitos.get(documento.getDocumentoId()).getNacionalidades();
+			estadosCiviles 	= mapaRequisitos.get(documento.getDocumentoId()).getEstadosCiviles();
+			requerido 		= mapaRequisitos.get(documento.getDocumentoId()).getRequerido();
+			coordinador 	= mapaRequisitos.get(documento.getDocumentoId()).getAutorizar();
 			if (requerido.equals("S")) {
 				etiqueta	= "<span class='badge bg-dark'>"+row+"</span>";
 			}
@@ -67,6 +83,18 @@
 	    	</td>
 	    	<td>
 	    	<%=modalidades%>
+    		</td>
+	    	<td>
+	    	<%=niveles%>
+    		</td>
+	    	<td>
+	    	<%=tipos%>
+    		</td>
+	    	<td>
+	    	<%=nacionalidades%>
+    		</td>
+	    	<td>
+	    	<%=estadosCiviles%>
     		</td>
 	    	<td>
 	    	<%=valor%>

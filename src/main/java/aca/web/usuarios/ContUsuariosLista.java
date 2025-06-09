@@ -177,9 +177,9 @@ public class ContUsuariosLista {
 		
 		for(AlumPersonal alumno: lisAlumnos) {
 		
-			if (accesoDao.existeReg(alumno.getCodigoPersonal())==false){
+			if (!accesoDao.existeReg(alumno.getCodigoPersonal())){
 				String clave = aca.util.Encriptar.sha512ConBase64(alumno.getCodigoPersonal());
-				String claveHexa = bCryptPasswordEncoder.encode(alumno.getCodigoPersonal());
+				String claveHexa = bCryptPasswordEncoder.encode(clave);
 				
 				Acceso acceso = new Acceso();
 				acceso.setCodigoPersonal(alumno.getCodigoPersonal());

@@ -28,7 +28,8 @@ public class AlumUbicacionDao{
 				"P_NOMBRE, P_RELIGION, P_NACIONALIDAD, "+
 				"M_NOMBRE, M_RELIGION, M_NACIONALIDAD, "+
 				"T_NOMBRE, T_DIRECCION, T_COLONIA, T_CODIGO, T_APARTADO, T_TELEFONO, "+
-				"T_EMAIL, T_PAIS, T_ESTADO, T_CIUDAD, T_CELULAR,T_COMUNICA, CODIGO_PADRE, CODIGO_MADRE, FECHA, VACUNA, DESCRIPCION_VACUNA, RECOGIDA_ID)"+				
+				"T_EMAIL, T_PAIS, T_ESTADO, T_CIUDAD, T_CELULAR,T_COMUNICA, CODIGO_PADRE, CODIGO_MADRE, FECHA, VACUNA, DESCRIPCION_VACUNA, RECOGIDA_ID,"+
+				"P_PAIS, P_ESTADO, P_CIUDAD, P_ORIGEN, M_PAIS, M_ESTADO, M_CIUDAD, M_ORIGEN)"+				
 				"VALUES( ?, ?, "+
 				"TO_NUMBER(?,'99'), "+
 				"TO_NUMBER(?,'999'), "+
@@ -38,14 +39,16 @@ public class AlumUbicacionDao{
 				" ?, ?, ?, ?, ?, ?, ?, "+
 				"TO_NUMBER(?,'999'), "+
 				"TO_NUMBER(?,'999'), "+
-				"TO_NUMBER(?,'999'), ?, ?, ?, ?, TO_DATE(?, 'DD/MM/YYYY'), ?, ?, TO_NUMBER(?,'999'))";
+				"TO_NUMBER(?,'999'), ?, ?, ?, ?, TO_DATE(?, 'DD/MM/YYYY'), ?, ?, TO_NUMBER(?,'999'),"+
+				"TO_NUMBER(?,'999'), TO_NUMBER(?,'999'), TO_NUMBER(?,'999'), ?, TO_NUMBER(?,'999'), TO_NUMBER(?,'999'), TO_NUMBER(?,'999'), ?)";
 			Object[] parametros = new Object[] {
 					alumUbicacion.getCodigoPersonal(),alumUbicacion.getpNombre(),alumUbicacion.getpReligion(),alumUbicacion.getpNacionalidad(),
 					alumUbicacion.getmNombre(),alumUbicacion.getmReligion(),alumUbicacion.getmNacionalidad(),alumUbicacion.gettNombre(),alumUbicacion.gettDireccion(),
 					alumUbicacion.gettColonia(),alumUbicacion.gettCodigo(),alumUbicacion.gettApartado(),alumUbicacion.gettTelefono(),alumUbicacion.gettEmail(),
 					alumUbicacion.gettPais(),alumUbicacion.gettEstado(),alumUbicacion.gettCiudad(),alumUbicacion.gettCelular(),alumUbicacion.gettComunica(),
 					alumUbicacion.getCodigoPadre(),alumUbicacion.getCodigoMadre(),alumUbicacion.getFecha(),alumUbicacion.getVacuna(),alumUbicacion.getDescripcionVacuna(),
-					alumUbicacion.getRecogidaId()
+					alumUbicacion.getRecogidaId(),alumUbicacion.getpPais(),alumUbicacion.getpEstado(),alumUbicacion.getpCiudad(),alumUbicacion.getpOrigen(),
+					alumUbicacion.getmPais(),alumUbicacion.getmEstado(),alumUbicacion.getmCiudad(),alumUbicacion.getmOrigen()
  		 	};		
 			if (enocJdbc.update(comando,parametros)==1){
 				ok = true;
@@ -87,7 +90,15 @@ public class AlumUbicacionDao{
 				"FECHA = TO_DATE(?,'DD/MM/YYYY'), "+
 				"VACUNA = ?, "+
 				"DESCRIPCION_VACUNA = ?, "+
-				"RECOGIDA_ID = TO_NUMBER(?,'999') "+
+				"RECOGIDA_ID = TO_NUMBER(?,'999'), "+
+				"P_PAIS = TO_NUMBER(?,'999'), "+
+				"P_ESTADO = TO_NUMBER(?,'999'), "+
+				"P_CIUDAD = TO_NUMBER(?,'999'), "+
+				"P_ORIGEN = ?, "+
+				"M_PAIS = TO_NUMBER(?,'999'), "+
+				"M_ESTADO = TO_NUMBER(?,'999'), "+
+				"M_CIUDAD = TO_NUMBER(?,'999'), "+
+				"M_ORIGEN = ? "+
 				"WHERE CODIGO_PERSONAL = ? ";
 			Object[] parametros = new Object[] {
 					alumUbicacion.getpNombre(),alumUbicacion.getpReligion(),alumUbicacion.getpNacionalidad(),alumUbicacion.getmNombre(),
@@ -95,7 +106,10 @@ public class AlumUbicacionDao{
 					alumUbicacion.gettColonia(),alumUbicacion.gettCodigo(),alumUbicacion.gettApartado(),alumUbicacion.gettTelefono(),
 					alumUbicacion.gettEmail(),alumUbicacion.gettPais(),alumUbicacion.gettEstado(),alumUbicacion.gettCiudad(),
 					alumUbicacion.gettCelular(),alumUbicacion.gettComunica(),alumUbicacion.getCodigoPadre(),alumUbicacion.getCodigoMadre(),
-					alumUbicacion.getFecha(),alumUbicacion.getVacuna(),alumUbicacion.getDescripcionVacuna(),alumUbicacion.getRecogidaId(),alumUbicacion.getCodigoPersonal()};	
+					alumUbicacion.getFecha(),alumUbicacion.getVacuna(),alumUbicacion.getDescripcionVacuna(),alumUbicacion.getRecogidaId(),
+					alumUbicacion.getpPais(),alumUbicacion.getpEstado(),alumUbicacion.getpCiudad(),alumUbicacion.getpOrigen(),
+					alumUbicacion.getmPais(),alumUbicacion.getmEstado(),alumUbicacion.getmCiudad(),alumUbicacion.getmOrigen(),
+					alumUbicacion.getCodigoPersonal()};	
 			if (enocJdbc.update(comando,parametros)==1){
 				ok = true;
 			}	
@@ -138,13 +152,24 @@ public class AlumUbicacionDao{
 				" T_CIUDAD = TO_NUMBER(?,'999')," +
 				" T_CELULAR = ?," +
 				" T_COMUNICA = ?,"+
-				" RECOGIDA_ID = TO_NUMBER(?,'999')"+
+				" RECOGIDA_ID = TO_NUMBER(?,'999'),"+
+				" P_PAIS = TO_NUMBER(?,'999'),"+
+				" P_ESTADO = TO_NUMBER(?,'999'),"+
+				" P_CIUDAD = TO_NUMBER(?,'999'),"+
+				" P_ORIGEN = TO_NUMBER(?,'999'),"+
+				" M_PAIS = TO_NUMBER(?,'999'),"+
+				" M_ESTADO = TO_NUMBER(?,'999'),"+
+				" M_CIUDAD = TO_NUMBER(?,'999'),"+
+				" M_ORIGEN = TO_NUMBER(?,'999')"+
 				" WHERE CODIGO_PERSONAL = ? ";
 			Object[] parametros = new Object[] {
 					alumUbicacion.gettDireccion(),alumUbicacion.gettColonia(),alumUbicacion.gettCodigo(),
 					alumUbicacion.gettApartado(),alumUbicacion.gettTelefono(),alumUbicacion.gettEmail(),
 					alumUbicacion.gettPais(),alumUbicacion.gettEstado(),alumUbicacion.gettCiudad(),
-					alumUbicacion.gettCelular(),alumUbicacion.gettComunica(),alumUbicacion.getRecogidaId(),alumUbicacion.getCodigoPersonal()		
+					alumUbicacion.gettCelular(),alumUbicacion.gettComunica(),alumUbicacion.getRecogidaId(),
+					alumUbicacion.getpPais(),alumUbicacion.getpEstado(),alumUbicacion.getpCiudad(),alumUbicacion.getpOrigen(),
+					alumUbicacion.getmPais(),alumUbicacion.getmEstado(),alumUbicacion.getmCiudad(),alumUbicacion.getmOrigen(),
+					alumUbicacion.getCodigoPersonal()		
 			};
 			if (enocJdbc.update(comando,parametros)==1){
 				ok = true;
@@ -184,7 +209,7 @@ public class AlumUbicacionDao{
 						+ " M_NOMBRE, M_RELIGION, M_NACIONALIDAD,"
 						+ " T_NOMBRE, T_DIRECCION, T_COLONIA, T_CODIGO, T_APARTADO, T_TELEFONO,"
 						+ " T_EMAIL, T_PAIS, T_ESTADO, T_CIUDAD, T_CELULAR, T_COMUNICA, T_EDOCD, CODIGO_PADRE, CODIGO_MADRE,"
-						+ " TO_CHAR(FECHA,'DD/MM/YYYY') AS FECHA, VACUNA, DESCRIPCION_VACUNA, RECOGIDA_ID"
+						+ " TO_CHAR(FECHA,'DD/MM/YYYY') AS FECHA, VACUNA, DESCRIPCION_VACUNA, RECOGIDA_ID, P_PAIS, P_ESTADO, P_CIUDAD, P_ORIGEN, M_PAIS, M_ESTADO, M_CIUDAD, M_ORIGEN"
 						+ " FROM ENOC.ALUM_UBICACION WHERE CODIGO_PERSONAL = ?";
 				ubicacion = enocJdbc.queryForObject(comando, new AlumUbicacionMapper(), parametros);
 			}			
@@ -278,7 +303,7 @@ public class AlumUbicacionDao{
 				+ " M_NOMBRE, M_RELIGION, M_NACIONALIDAD,"
 				+ " T_NOMBRE, T_DIRECCION, T_COLONIA, T_CODIGO, T_APARTADO, T_TELEFONO,"
 				+ " T_EMAIL, T_PAIS, T_ESTADO, T_CIUDAD, T_CELULAR, T_COMUNICA, T_EDOCD,"
-				+ " CODIGO_PADRE, CODIGO_MADRE, FECHA, VACUNA, DESCRIPCION_VACUNA, RECOGIDA_ID"
+				+ " CODIGO_PADRE, CODIGO_MADRE, FECHA, VACUNA, DESCRIPCION_VACUNA, RECOGIDA_ID, P_PAIS, P_ESTADO, P_CIUDAD, P_ORIGEN, M_PAIS, M_ESTADO, M_CIUDAD, M_ORIGEN"
 				+ " FROM ENOC.ALUM_UBICACION "+orden;				
 			lista = enocJdbc.query(comando, new AlumUbicacionMapper());
 		}catch(Exception ex){
@@ -297,7 +322,7 @@ public class AlumUbicacionDao{
 					+ " M_NOMBRE, M_RELIGION, M_NACIONALIDAD,"
 					+ " T_NOMBRE, T_DIRECCION, T_COLONIA, T_CODIGO, T_APARTADO, T_TELEFONO,"
 					+ " T_EMAIL, T_PAIS, T_ESTADO, T_CIUDAD, T_CELULAR, T_COMUNICA, T_EDOCD, "
-					+ " CODIGO_PADRE, CODIGO_MADRE, FECHA, VACUNA, DESCRIPCION_VACUNA, RECOGIDA_ID"
+					+ " CODIGO_PADRE, CODIGO_MADRE, FECHA, VACUNA, DESCRIPCION_VACUNA, RECOGIDA_ID, P_PAIS, P_ESTADO, P_CIUDAD, P_ORIGEN, M_PAIS, M_ESTADO, M_CIUDAD, M_ORIGEN"
 					+ " FROM ENOC.ALUM_UBICACION "
 					+ " WHERE CODIGO_PERSONAL "
 					+ " IN(SELECT CODIGO_PERSONAL FROM ESTADISTICA WHERE CARGA_ID IN ("+cargas+") "
@@ -321,7 +346,7 @@ public class AlumUbicacionDao{
 					+ " M_NOMBRE, M_RELIGION, M_NACIONALIDAD,"
 					+ " T_NOMBRE, T_DIRECCION, T_COLONIA, T_CODIGO, T_APARTADO, T_TELEFONO,"
 					+ " T_EMAIL, T_PAIS, T_ESTADO, T_CIUDAD, T_CELULAR, T_COMUNICA, T_EDOCD, "
-					+ " CODIGO_PADRE, CODIGO_MADRE, FECHA, VACUNA, DESCRIPCION_VACUNA, RECOGIDA_ID"
+					+ " CODIGO_PADRE, CODIGO_MADRE, FECHA, VACUNA, DESCRIPCION_VACUNA, RECOGIDA_ID, P_PAIS, P_ESTADO, P_CIUDAD, P_ORIGEN, M_PAIS, M_ESTADO, M_CIUDAD, M_ORIGEN"
 					+ " FROM ENOC.ALUM_UBICACION "
 					+ " WHERE CODIGO_PERSONAL IN(SELECT CODIGO_PERSONAL FROM ENOC.INSCRITOS)"
 					+ " AND VACUNA = 'S' "+orden;			
@@ -365,7 +390,7 @@ public class AlumUbicacionDao{
 				+ " M_NOMBRE, M_RELIGION, M_NACIONALIDAD, "
 				+ " T_NOMBRE, T_DIRECCION, T_COLONIA, T_CODIGO, T_APARTADO, T_TELEFONO, "
 				+ " T_EMAIL, T_PAIS, T_ESTADO, T_CIUDAD, T_CELULAR, T_COMUNICA, T_EDOCD,"
-				+ " CODIGO_PADRE, CODIGO_MADRE, FECHA, VACUNA, DESCRIPCION_VACUNA, RECOGIDA_ID"
+				+ " CODIGO_PADRE, CODIGO_MADRE, FECHA, VACUNA, DESCRIPCION_VACUNA, RECOGIDA_ID, P_PAIS, P_ESTADO, P_CIUDAD, P_ORIGEN, M_PAIS, M_ESTADO, M_CIUDAD, M_ORIGEN"
 				+ " FROM ENOC.ALUM_UBICACION WHERE CODIGO_PERSONAL IN(SELECT CODIGO_PERSONAL FROM ENOC.INSCRITOS) "+ orden;				
 			lista = enocJdbc.query(comando, new AlumUbicacionMapper());
 			for (AlumUbicacion ubicacion : lista){
@@ -385,7 +410,7 @@ public class AlumUbicacionDao{
 		try{
 			String comando = "SELECT CODIGO_PERSONAL, P_NOMBRE, P_RELIGION, P_NACIONALIDAD, M_NOMBRE, M_RELIGION, M_NACIONALIDAD,"+
 				" T_NOMBRE, T_DIRECCION, T_COLONIA, T_CODIGO, T_APARTADO, T_TELEFONO, T_EMAIL, T_PAIS, T_ESTADO, T_CIUDAD, T_CELULAR, T_COMUNICA, T_EDOCD,"+
-				" CODIGO_PADRE, CODIGO_MADRE, FECHA, VACUNA, DESCRIPCION_VACUNA, RECOGIDA_ID"+
+				" CODIGO_PADRE, CODIGO_MADRE, FECHA, VACUNA, DESCRIPCION_VACUNA, RECOGIDA_ID, P_PAIS, P_ESTADO, P_CIUDAD, P_ORIGEN, M_PAIS, M_ESTADO, M_CIUDAD, M_ORIGEN"+
 				" FROM ENOC.ALUM_UBICACION"+
 				" WHERE CODIGO_PERSONAL IN(SELECT CODIGO_PERSONAL FROM ENOC.INSCRITOS)"; 
 			lista = enocJdbc.query(comando, new AlumUbicacionMapper());
@@ -405,7 +430,7 @@ public class AlumUbicacionDao{
 		try{
 			String comando	= "SELECT CODIGO_PERSONAL, P_NOMBRE, P_RELIGION, P_NACIONALIDAD, M_NOMBRE, M_RELIGION, M_NACIONALIDAD,"
 					+ " T_NOMBRE, T_DIRECCION, T_COLONIA, T_CODIGO, T_APARTADO, T_TELEFONO, T_EMAIL, T_PAIS, T_ESTADO, T_CIUDAD, T_CELULAR, T_COMUNICA, T_EDOCD,"
-					+ " CODIGO_PADRE, CODIGO_MADRE, FECHA, VACUNA, DESCRIPCION_VACUNA, RECOGIDA_ID"
+					+ " CODIGO_PADRE, CODIGO_MADRE, FECHA, VACUNA, DESCRIPCION_VACUNA, RECOGIDA_ID, P_PAIS, P_ESTADO, P_CIUDAD, P_ORIGEN, M_PAIS, M_ESTADO, M_CIUDAD, M_ORIGEN"
 					+ " FROM ENOC.ALUM_UBICACION " +
 					" WHERE CODIGO_PERSONAL IN (SELECT CODIGO_PERSONAL FROM ENOC.ALUM_ESTADO WHERE CARGA_ID IN ("+cargas+"))";			
 			lista = enocJdbc.query(comando, new AlumUbicacionMapper());

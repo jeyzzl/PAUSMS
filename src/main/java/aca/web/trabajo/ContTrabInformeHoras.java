@@ -107,6 +107,8 @@ public class ContTrabInformeHoras {
 		List<TrabCategoria> lisCategorias 		= trabCategoriaDao.lisPorDepartamento(deptId, " ORDER BY CAT_ID");
 		if (catId.equals("0")&&lisCategorias.size()>= 1) catId = lisCategorias.get(0).getCategoriaId();
 
+		// System.out.println(deptId+":"+catId+":"+periodoId+":"+fecha);
+
 		List<TrabInformeAlum> lisInformes		= trabInformeAlumDao.lisInformes(deptId, catId, periodoId, fecha, " ORDER BY CAT_ID");
 
 		boolean esAsesor = trabAsesorDao.esAsesor(codigoPersonal);

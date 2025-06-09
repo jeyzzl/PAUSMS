@@ -350,7 +350,7 @@ public class AdmDocAlumDao {
 		HashMap<String, String> mapa = new HashMap<String, String>();
 		List<aca.Mapa> lista	= new ArrayList<aca.Mapa>();
 		try{
-			String comando = "SELECT FOLIO AS LLAVE, COUNT(FOLIO) AS VALOR FROM SALOMON.ADM_DOCALUM WHERE ESTADO = 'A' GROUP BY FOLIO ORDER BY FOLIO";
+			String comando = "SELECT FOLIO AS LLAVE, COUNT(FOLIO) AS VALOR FROM SALOMON.ADM_DOCALUM WHERE ESTADO = 'E' GROUP BY FOLIO ORDER BY FOLIO";
 			lista = enocJdbc.query(comando, new aca.MapaMapper());
 			for (aca.Mapa map : lista) {
 				mapa.put(map.getLlave(), map.getValor());

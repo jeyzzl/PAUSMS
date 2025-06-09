@@ -25,7 +25,7 @@ String mensaje				= request.getParameter("Mensaje")==null?"-":request.getParamet
 %>
 <body>
 <div class="container-fluid">
-	<h1><spring:message code="catalogos.instituciones.Titulo2"/></h1>
+	<h2>Edit Endorser</h2>
 	<form action="grabarInstitucion" method="post" name="frminstitucion" target="_self">
 	<div class="alert alert-info">
 		<a href="institucion" class="btn btn-primary"><i class="fas fa-arrow-left"></i></a>

@@ -18,7 +18,7 @@
 %>
 <body>
 <div class="container-fluid">
-	<h1><spring:message code="catalogos.instituciones.Titulo"/></h1>
+	<h2>Employment Endorsers</h2>
 	<div class="alert alert-info">
 		<a class="btn btn-primary" href="editarInstitucion"><spring:message code="aca.Anadir"/></a>
 	</div>
@@ -27,7 +27,7 @@
 	<tr>
 		<th width="5%"><spring:message code="aca.Operacion"/></th>
 		<th width="5%"><spring:message code="aca.Numero"/></th>
-		<th width="89%">Sponsorship</th>
+		<th width="89%">Endorser</th>
 	</tr>
 <%
 	for (CatInstitucion institucion : lisInstituciones){

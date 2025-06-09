@@ -90,8 +90,8 @@
 	  			<option value="0" <%=estado.equals("0")?"Selected":""%>>All</option>
 	  			<option value="1" <%=estado.equals("1")?"Selected":""%>>1.Account Generated</option>
 	  			<option value="2" <%=estado.equals("2")?"Selected":""%>>2.Completed Application</option>
-	  			<option value="3" <%=estado.equals("3")?"Selected":""%>>3.Documents</option>
-	  			<option value="4" <%=estado.equals("4")?"Selected":""%>>4.Auhtorized</option>
+	  			<option value="3" <%=estado.equals("3")?"Selected":""%>>3.Completed Documents</option>
+	  			<option value="4" <%=estado.equals("4")?"Selected":""%>>4.Registered Fees</option>
 	  			<option value="5" <%=estado.equals("5")?"Selected":""%>>5.Transferred</option>
 	  			<option value="6" <%=estado.equals("6")?"Selected":""%>>6.Inactive</option>
 	  		</select>

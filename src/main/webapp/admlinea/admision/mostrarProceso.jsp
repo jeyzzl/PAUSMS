@@ -327,12 +327,12 @@
 <%	if ( esAsesor || acceso.getAdministrador().equals("S")){%>	
 			Progress:	
 			<select name="Estado" class="form-select" style="width: 8rem">			
-				<option value="1" <%=admSolicitud.getEstado().equals("1")?"selected":""%>>1.Create Account</option>
-				<option value="2" <%=admSolicitud.getEstado().equals("2")?"selected":""%>>2.Request</option>
-				<option value="3" <%=admSolicitud.getEstado().equals("3")?"selected":""%>>3.Documents</option>
-				<option value="4" <%=admSolicitud.getEstado().equals("4")?"selected":""%>>4.Payment</option>			
-				<option value="5" <%=admSolicitud.getEstado().equals("5")?"selected":""%>>5.Registered</option>
-				<option value="6" <%=admSolicitud.getEstado().equals("6")?"selected":""%>>6.Inactive</option>
+				<option value="1" <%=admSolicitud.getEstado().equals("1")?"selected":""%>>1.Account Generated</option> <!-- status 1-->
+				<option value="2" <%=admSolicitud.getEstado().equals("2")?"selected":""%>>2.Completed Application</option> <!-- status 2-->
+				<option value="3" <%=admSolicitud.getEstado().equals("3")?"selected":""%>>3.Completed Documents</option> <!-- status3-->
+				<option value="4" <%=admSolicitud.getEstado().equals("4")?"selected":""%>>4.Registered Fees</option> <!-- status4-->			
+				<option value="5" <%=admSolicitud.getEstado().equals("5")?"selected":""%>>5.Transferred</option> <!-- status 5--> 
+				<option value="6" <%=admSolicitud.getEstado().equals("6")?"selected":""%>>6.Inactive</option> <!-- status -->
 			</select>&nbsp;
 			Advisor:
 			<select name="AsesorId" style="width:300px;" class=" mx-2 form-select" style="width: 12rem">
