@@ -82,6 +82,25 @@ public class AdmArchivoDao {
 		return ok;
 	}
 
+	public boolean deleteReg(String folio){
+		boolean ok = false;
+		
+		try{
+			String comando = "DELETE FROM ADM_ARCHIVO"+
+				" WHERE FOLIO = TO_NUMBER(?,'9999999')";
+			
+			Object[] parametros = new Object[]{folio};
+			if (admisionJdbc.update(comando,parametros) >= 1){
+				ok = true;
+			}
+
+		}catch(Exception ex){
+			System.out.println("Error - adm.documento.apring.AdmArchivoDao|deleteReg|:"+ex);
+		}
+		
+		return ok;
+	}
+
 	public boolean deleteRegFolio(String folio){
 		boolean ok = false;		
 		try{

@@ -253,7 +253,7 @@ admSolicitud.getFolio(), admSolicitud.getNombre(), admSolicitud.getApellidoPater
 		return ok;
 	}
 	
-	public boolean deleteReg(String folio) throws Exception{
+	public boolean deleteReg(String folio){
 		boolean ok = false;		
 		try{
 			String comando = "DELETE FROM SALOMON.ADM_SOLICITUD WHERE FOLIO = TO_NUMBER(?,'9999999')";			
@@ -653,7 +653,6 @@ admSolicitud.getFolio(), admSolicitud.getNombre(), admSolicitud.getApellidoPater
 		try {
 			String comando = "SELECT FOLIO AS LLAVE, NOMBRE||' '||APELLIDO_PATERNO||' '||APELLIDO_MATERNO AS VALOR FROM SALOMON.ADM_SOLICITUD WHERE"
 					+ "	FOLIO NOT IN (SELECT FOLIO FROM SALOMON.ADM_ACADEMICO) AND"
-					+ "	FOLIO NOT IN (SELECT FOLIO FROM SALOMON.ADM_ESTUDIO) AND"
 					+ " FOLIO NOT IN (SELECT FOLIO FROM SALOMON.ADM_DOCALUM) AND"
 					+ " FOLIO NOT IN (SELECT FOLIO FROM SALOMON.ADM_ESTUDIO) AND"
 					+ " FOLIO NOT IN (SELECT FOLIO FROM SALOMON.ADM_PADRES) AND"

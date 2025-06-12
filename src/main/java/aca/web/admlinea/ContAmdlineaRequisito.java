@@ -217,6 +217,7 @@ public class ContAmdlineaRequisito {
 		String strTipo = "-";
 		if(request.getParameter("chkTipoS")!=null) strTipo += "S"+"-";
 		if(request.getParameter("chkTipoN")!=null) strTipo += "N"+"-";
+		if(request.getParameter("chkTipoR")!=null)	strTipo += "R"+"-";
 
 		String strNac = "-";
 		if(request.getParameter("chkNacN")!=null) strNac += "N"+"-";

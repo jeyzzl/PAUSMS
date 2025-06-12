@@ -47,6 +47,22 @@ public class AdmPasosDao {
 		
 		return ok;
 	}	
+
+	public boolean deleteReg(String folio){
+		boolean ok = false;
+		try{
+			String comando = "DELETE FROM SALOMON.ADM_PASOS WHERE FOLIO = TO_NUMBER(?,'9999999')";
+			Object[] parametros = new Object[] { folio};
+			if (enocJdbc.update(comando,parametros)==1){
+				ok = true;
+			}		
+		}catch(Exception ex){
+			System.out.println("Error - aca.admision.spring.AdmPasosDao|deleteReg|:"+ex);
+			ok = false;
+		}
+		
+		return ok;
+	}
 	
 	public AdmPasos mapeaRegId(String folio, String paso) {
 		AdmPasos admPasos = new AdmPasos();
@@ -76,6 +92,20 @@ public class AdmPasosDao {
 			}			
 		}catch(Exception ex){
 			System.out.println("Error - aca.admision.spring.AdmPasosDao|existeReg|:"+ex);
+		}		
+		return ok;
+	}
+
+	public boolean existeRegFolio(String folio) {
+		boolean ok 	= false;		
+		try{
+			String comando = "SELECT COUNT(FOLIO) FROM SALOMON.ADM_PASOS WHERE FOLIO = TO_NUMBER(?,'9999999')";
+			Object[] parametros = new Object[] {folio};
+			if (enocJdbc.queryForObject(comando, Integer.class, parametros) >= 1){
+				ok = true;
+			}			
+		}catch(Exception ex){
+			System.out.println("Error - aca.admision.spring.AdmPasosDao|existeRegFolio|:"+ex);
 		}		
 		return ok;
 	}

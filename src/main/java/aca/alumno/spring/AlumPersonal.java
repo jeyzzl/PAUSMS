@@ -68,8 +68,8 @@ public class AlumPersonal{
  		credencial			= "-";
  		num_oferta			= "0";
  		fBautizado			= "01/01/2000";
- 		culturalId			= "1";
- 		regionId			= "1";
+ 		culturalId			= "";
+ 		regionId			= "";
 		resPaisId 			= "153";
 		resEstadoId 		= "1";
 		resCiudadId 		= "1";

@@ -19,7 +19,6 @@
 <%
 	Parametros parametros 			= (Parametros)request.getAttribute("parametros");
 	String institucion 				= (String)session.getAttribute("institucion");
-	System.out.println(institucion);
 	String usuario 					= (String)session.getAttribute("codigoPersonal");
 	String codigoAlumno				= (String)session.getAttribute("codigoAlumno");
 	String accion 					= request.getParameter("Accion")==null?"0":request.getParameter("Accion");

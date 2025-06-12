@@ -41,9 +41,9 @@ public class AlumPersonalDao{
  				" TO_NUMBER(COALESCE(?, '1'),'999'), "+
  				" TO_NUMBER(COALESCE(?, '1'),'999'), "+
  				" ?, ?, ?, ?, ?, TO_DATE(?, 'DD/MM/YYYY'), ?, ?, ?, TO_DATE(?,'DD/MM/YYYY'), "+
- 				" TO_NUMBER(COALESCE(?, '1'),'999'),"+
- 				" TO_NUMBER(COALESCE(?, '0'),'999'),"+
- 				" TO_NUMBER(COALESCE(?, '1'),'999'),"+
+ 				" TO_NUMBER(?,'999'),"+
+ 				" TO_NUMBER(?,'999'),"+
+ 				" TO_NUMBER(COALESCE(?, '153'),'999'),"+
  				" TO_NUMBER(COALESCE(?, '1'),'999'),"+
  				" TO_NUMBER(COALESCE(?, '1'),'999'),"+
 				" ?)";

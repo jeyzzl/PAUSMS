@@ -179,6 +179,11 @@
 			<td><strong>2</strong></td>
 			<td>Non-school Leaver</td>
 		</tr>
+		<tr>
+			<td><input type="checkbox" id="chkTipoR" name="chkTipoR" <%=lisTipos.contains("R")?"checked":""%>/></td>
+			<td><strong>3</strong></td>
+			<td>Re-Admission</td>
+		</tr>
 	</table>
 	<table class="table" style="width:50%;">
 		<tr>

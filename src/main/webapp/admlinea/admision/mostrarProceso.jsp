@@ -163,6 +163,12 @@
 			});
 		}
 
+		function eliminarSolicitud(folio){
+			if(confirm("Do you want to delete this Application? This action cannot be reverted.")){
+				document.location.href='eliminarSolicitud?Folio='+folio;
+			}
+		}
+
 		function marcarPago(folio){
 			if(confirm("Do you want to change the student payment status to 'paid'?")){
 				document.location.href='marcarPago?Folio='+folio;
@@ -231,6 +237,7 @@
 	</script>
 </head>
 <%	
+	boolean admin 				= (boolean) session.getAttribute("admin");
 	String codigoPersonal		= (String) session.getAttribute("codigoPersonal");
 	String fechaIni 			= (String) session.getAttribute("fechaInicio");
 	String fechaFin 			= (String) session.getAttribute("fechaFinal");	
@@ -368,6 +375,9 @@
 <%		}
 	}	
 %>		
+<%	if(admin){%>
+		<a class="btn btn-danger mx-1" href="javascript:eliminarSolicitud('<%=folio%>')">Delete <i class="fas fa-trash"></i></a>
+<%	}%>
 		</div>
 	</form>
 <%	if (tieneMatricula){%>	

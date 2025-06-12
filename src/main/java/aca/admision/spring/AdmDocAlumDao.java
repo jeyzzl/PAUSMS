@@ -115,6 +115,25 @@ public class AdmDocAlumDao {
 
 		return ok;
 	}
+
+	public boolean deleteReg(String folio) {
+		boolean ok = false;
+		
+		try{
+			String comando = "DELETE FROM SALOMON.ADM_DOCALUM "+
+				"WHERE FOLIO = TO_NUMBER(?,'99999999')";
+			
+			Object[] parametros = new Object[]{folio};
+			if (enocJdbc.update(comando,parametros) >= 1){
+				ok = true;
+			}
+
+		}catch(Exception ex){
+			System.out.println("Error - aca.admision.spring.AdmDocAlumDao|deleteReg|:"+ex);
+		}
+
+		return ok;
+	}
 	
 	public boolean deleteRegFolio(String folio) {
 		boolean ok = false;

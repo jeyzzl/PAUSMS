@@ -829,14 +829,14 @@ public class ContAdmisionDatos {
 		Parametros parametros = parametrosDao.mapeaRegId("1");
 
         List<CatReligion> lisReligiones 		= catReligionDao.getListAll(" ORDER BY 2");
-        List<CatPais> lisPaises 				= catPaisDao.getListAllWithPriorityCountry(parametros.getPaisId());
-        List<CatEstado> lisEstados 				= catEstadoDao.getLista(parametros.getPaisId(),"ORDER BY 2,3");
-        List<CatCiudad> lisCiudades 			= catCiudadDao.getLista(parametros.getPaisId(), "1", "ORDER BY 3");
+        List<CatPais> lisPaises 				= catPaisDao.getListAllWithPriorityCountry(alumPersonal.getPaisId());
+        List<CatEstado> lisEstados 				= catEstadoDao.getLista(alumPersonal.getPaisId(),"ORDER BY 2,3");
+        List<CatCiudad> lisCiudades 			= catCiudadDao.getLista(alumPersonal.getPaisId(), alumPersonal.getEstadoId(), "ORDER BY 3");
         List<CatCultural> lisGrupos				= catCulturalDao.getListAll("");
         List<CatRegion> lisRegiones				= catRegionDao.getLista(alumPersonal.getCulturalId(), "");
-		List<CatPais> lisResPaises 				= catPaisDao.getListAllWithPriorityCountry(parametros.getPaisId());
-		List<CatEstado> lisResEstados 			= catEstadoDao.getLista(parametros.getPaisId(), "ORDER BY 2,3");
-		List<CatCiudad> lisResCiudades 			= catCiudadDao.getLista(parametros.getPaisId(), "1", "ORDER BY 3");
+		List<CatPais> lisResPaises 				= catPaisDao.getListAllWithPriorityCountry(alumPersonal.getResPaisId());
+		List<CatEstado> lisResEstados 			= catEstadoDao.getLista(alumPersonal.getResPaisId(), "ORDER BY 2,3");
+		List<CatCiudad> lisResCiudades 			= catCiudadDao.getLista(alumPersonal.getResPaisId(), alumPersonal.getResEstadoId(), "ORDER BY 3");
 
 		modelo.addAttribute("alumPersonal", alumPersonal);
 		modelo.addAttribute("logAlumno", logAlumno);

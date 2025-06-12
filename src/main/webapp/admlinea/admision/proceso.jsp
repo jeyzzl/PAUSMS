@@ -48,6 +48,8 @@
 	String modalidades 			= (String)request.getAttribute("modalidades");
 	String nombreAlumno 		= (String)request.getAttribute("nombreAlumno");
 	String institucionPaisId 	= (String)request.getAttribute("institucionPaisId");
+	String mensaje 				= request.getParameter("Mensaje")==null?"-":request.getParameter("Mensaje");
+	// System.out.println(mensaje);
 	
 	Acceso acceso 				= (Acceso)request.getAttribute("acceso");
 	String asesor 				= (String)request.getAttribute("asesor");
@@ -152,19 +154,10 @@
 			<a href="sinSolicitud" class="btn btn-success" title="Registered without Application"><i class="fas fa-search"></i></a>
     	</form>
   	</div>
-  	<% if(codigoPersonal.equals("XX")){ 
-	%>  	
-  	<script>
-		function copiaDatosFaltantes (){
-			jQuery.get("copiaDatosFaltantes?matLike="+jQuery("#matLike").val(), function(data){
-				jQuery("#divCopiaDatosFaltantes").html("<p>"+data+"</p>")
-			});
-		}
-	</script>
-  	<div class="alert alert-info" align="left" id="divCopiaDatosFaltantes">
-  		<input type="text" class="text" id="matLike" value="120" />
-  		<input class="btn btn-primary" type="button" value="Copy data to registered students" onclick="copiaDatosFaltantes();" />
-  	</div>
+  	<% if(!mensaje.equals("-") && mensaje != null){ %>  	
+		<div class="alert alert-warning">
+			<%=mensaje%>
+		</div>
   	<% }
 	 %>		
   	<div class="d-flex justify-content"> 

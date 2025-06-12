@@ -1013,6 +1013,36 @@ public class ContAmdlineaAdmision {
 
 		return "redirect:/admlinea/admision/proceso";
 	}
+
+	@RequestMapping("/admlinea/admision/eliminarSolicitud")
+	public String eliminarSolicitud(HttpServletRequest request, Model modelo){
+		String folio = request.getParameter("Folio");	
+		String mensaje = "";
+
+		boolean admArchivo 		= admArchivoDao.existeRegFolio(folio);
+		boolean admDocAlum 		= admDocAlumDao.existeRegFolio(folio);
+		boolean admRecomienda 	= admRecomiendaDao.existeRegFolio(folio);
+		boolean admSalud 		= admSaludDao.existeReg(folio);
+		boolean admEstudio 		= admEstudioDao.existeRegFolio(folio);
+		boolean admAcademico 	= admAcademicoDao.existeReg(folio);
+		boolean admSolicitud 	= admSolicitudDao.existeReg(folio);
+		boolean admProceso 		= admProcesoDao.existeReg(folio);
+		boolean admPasos 		= admPasosDao.existeRegFolio(folio);
+
+		if(admArchivo) admArchivoDao.deleteReg(folio);
+		if(admDocAlum) admDocAlumDao.deleteReg(folio);
+		if(admRecomienda) admRecomiendaDao.deleteReg(folio);
+		if(admSalud) admSaludDao.deleteReg(folio);
+		if(admEstudio) admEstudioDao.deleteReg(folio);
+		if(admAcademico) admAcademicoDao.deleteReg(folio);
+		if(admProceso) admProcesoDao.deleteReg(folio);
+		if(admPasos) admPasosDao.deleteReg(folio);
+		if(admSolicitud) admSolicitudDao.deleteReg(folio);
+		
+		mensaje = "Deleted application";
+		
+		return "redirect:/admlinea/admision/proceso?Mensaje="+mensaje;
+	}
 	
 	@ResponseBody
 	@RequestMapping(value="/admlinea/admision/copiaDatosFaltantes",method = RequestMethod.GET)
@@ -1676,7 +1706,7 @@ public class ContAmdlineaAdmision {
 		if (sesion != null){
 			if (!folio.equals("0")) sesion.setAttribute("folio", folio);
 			usuario 			= (String)sesion.getAttribute("codigoPersonal");		
-			acceso 				= accesoDao.mapeaRegId(usuario);			
+			acceso 				= accesoDao.mapeaRegId(usuario);	
 		}
 		if (admSolicitudDao.existeReg(folio)) {
 			admSolicitud 		= admSolicitudDao.mapeaRegId(folio);

@@ -12,7 +12,7 @@
 			document.frmDatos.Accion.value="1";			
 			document.frmDatos.submit();
 		}else{
-			alert('Enter the student´s name');				
+			alert('Enter the student name');				
 		}		
 	}
 			
